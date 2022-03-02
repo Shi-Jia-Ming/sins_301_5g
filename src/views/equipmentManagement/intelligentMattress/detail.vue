@@ -86,8 +86,7 @@ export default {
         this.echartsBreathe = res[1].breathe
         this.echartsBpm = res[1].bpm
         this.basicData = res[2].data
-        this.closeLoading()
-      }).catch(_=>{
+      }).finally(_=>{
         this.closeLoading()
       })
     }

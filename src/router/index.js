@@ -3,34 +3,11 @@ import Router from 'vue-router'
 
 Vue.use(Router)
 
-/* Layout */
 import Layout from '@/layout'
 
-/**
- * 注意：子菜单仅在 route children.length >= 1 时出现
- * 详情见：https://panjiachen.github.io/vue-element-admin-site/guide/essentials/router-and-nav.html
- *
- * hidden：如果设置为true，则项目不会显示在侧边栏中（默认为false）
- * alwaysShow: true 如果设置为 true，将始终显示根菜单
- * 如果不设置 alwaysShow，当 item 有多个子路由时，
- * 会变成嵌套模式，否则不显示根菜单
- * redirect: noRedirect 如果设置 noRedirect 将不会在面包屑中重定向
- * name:'router-name' <keep-alive> 使用的名称（必须设置！！！）
- * meta：{
-    roles: ['admin','editor'] 控制页面角色（可以设置多个角色）
-    title: 'title' 侧边栏和面包屑中显示的名称（推荐设置）
-    icon: 'svg-name'/'el-icon-x' 侧边栏中显示的图标
-    breadcrumb: false 如果设置为 false，该项目将隐藏在面包屑中（默认为 true）
-    activeMenu: '/example/list' 如果设置路径，侧边栏会高亮你设置的路径
-  }
-*/ 
+let url = location.href
+url = url.substring(url.indexOf('#'), -1)
 
-
-/**
-  * 常量路由
-  * 没有权限要求的基本页面
-  * 所有角色都可以访问
-*/
 export const constantRoutes = [
   {
     path: '/login',
@@ -58,7 +35,7 @@ export const constantRoutes = [
     component: () => import('@/views/dataVisualization/index'),
     children: [
       {
-        path: 'http://localhost:9527/#/dataVisualization',
+        path: `${url}#/dataVisualization`,
         meta: { title: '数据可视化', icon: 'dashboard' }
       }
     ]

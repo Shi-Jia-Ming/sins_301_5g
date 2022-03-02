@@ -39,7 +39,7 @@ const whiteList = ['/login']
 //     }
 //   } else {
 //     next()
-//     if (whiteList.indexOf(to.path) !== -1) {
+//     if (!whiteList. includes(to.path)) {
 //       next()
 //     } else {
 //       next(`/login?redirect=${to.path}`)
@@ -48,6 +48,6 @@ const whiteList = ['/login']
 //   }
 // })
 
-router.afterEach(() => {
+router.afterEach(_ => {
   NProgress.done()
 })

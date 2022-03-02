@@ -145,9 +145,6 @@ export default {
         case 1:
           this.dateType = 'monthrange'
           break;
-        // case 2:
-        //   this.dateType = 'year'
-        //   break;
       }
     },
     initEcharts() {
@@ -173,8 +170,7 @@ export default {
         this.option.series[0].data = breathe
         this.option.series[1].data = bpm
         this.exampleEcharts.setOption(this.option, true)
-        this.echartsLoading = false
-      }).catch(_=>{
+      }).finally(_=>{
         this.echartsLoading = false
       })
     }

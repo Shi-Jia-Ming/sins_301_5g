@@ -26,6 +26,7 @@ export default {
         method: "get"
       }).then(res => {
         this.dataList = res.data
+      }).finally(_=>{
         this.closeLoading()
       })
     },

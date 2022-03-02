@@ -66,8 +66,7 @@ export default {
       Promise.all(requestAll).then(res=>{
         this.basicData = res[0].data
         this.echartsData = res[1]
-        this.closeLoading()
-      }).catch(_=>{
+      }).finally(_=>{
         this.closeLoading()
       })
     }
