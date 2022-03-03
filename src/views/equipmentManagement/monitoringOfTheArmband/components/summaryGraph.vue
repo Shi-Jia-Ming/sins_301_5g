@@ -9,7 +9,11 @@
       <div class="right">
         <router-link :to="{
           path: '/equipment/armbandHistoryChart',
-          params: {a: 10}
+          name: 'ArmbandHistoryChart',
+          params: {
+            userId: this.userId,
+            equipmentId: this.equipmentId
+          }
         }"> 历史数据统计图 > </router-link>
       </div>
     </div>
@@ -23,6 +27,28 @@
 import * as echarts from "echarts"
 
 export default {
+  props: {
+    time: {
+      type: Array,
+      default: ()=> []
+    },
+    heartRate: {
+      type: Array,
+      default: ()=> []
+    },
+    temperature: {
+      type: Array,
+      default: ()=> []
+    },
+    userId: {
+      type: Number,
+      default: null
+    },
+    equipmentId: {
+      type: Number,
+      default: null
+    }
+  },
   data() {
     return {
       option: {
@@ -42,7 +68,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: '50%',
-          data: ["14:00","05","10","15","20","25","30","35","40","45","50","55","15:00"]
+          data: []
         },
         yAxis: [
           {
@@ -70,7 +96,7 @@ export default {
           {
             name: "体温",
             type: "line",
-            data: [120, 132, 101, 134, 90, 50, 30,120, 132, 101, 134, 90, 50],
+            data: [],
             symbol: 'circle',
             yAxisIndex: 0,
             smooth: true,
@@ -81,7 +107,7 @@ export default {
           {
             name: "心率",
             type: "line",
-            data: [20, 82, 91, 24, 90, 33, 30,20, 82, 91, 24, 90, 33],
+            data: [],
             symbol: 'circle',
             yAxisIndex: 1,
             smooth: true,
@@ -93,6 +119,17 @@ export default {
       }
     }
   },
+  watch: {
+    time: {
+      handler(){
+        this.option.xAxis.data = this.time
+        this.option.series[0].data = this.temperature
+        this.option.series[1].data = this.heartRate
+        this.initEcharts()
+      },
+      deep: true
+    }
+  },
   methods: {
     initEcharts() {
       const chartDom = this.$refs.echarts;
@@ -100,7 +137,7 @@ export default {
     },
   },
   mounted() {
-    this.initEcharts();
+    
   },
 };
 </script>

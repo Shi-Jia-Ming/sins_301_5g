@@ -1,13 +1,13 @@
 <template>
     <div class="itemBox">
-      <div v-for="item in dataList" :key="item" class="item" @click="gotoDetail">
-        <div class="top  warning_status"> 
+      <div v-for="item in dataList" :key="item.userId" class="item" @click="gotoDetail(item)">
+        <div class="top" :class="statusClass(item.status)"> 
           <div class="avatar">
             <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500">
           </div>
           <div class="info">
-            <div class="name">YouLi</div>
-            <div class="number">KT2-H13354</div>
+            <div class="name">{{ item.status ? item.userName : '无人在床' }}</div>
+            <div class="number">{{ item.status ? item.equipmentCode : '' }}</div>
           </div>
         </div>
         <div class="bot">
@@ -16,12 +16,12 @@
               体温
             </div>
             <div class="status">
-              正常
+              {{ item.status === 0 ? '' : item.status === 1 ? '正常' : item.status === 2 ? '警告' : '异常' }}
             </div>
           </div>
           <div class="list lx_flex">
             <div class="temperature">
-              36.8°C
+              {{ item.temperature }}°C
             </div>
             <div class="temperature_icon">
               <img src="@/assets/icon_images/icon-wenduji.png">
@@ -41,14 +41,32 @@ export default {
       default: ()=> []
     }
   },
+  computed: {
+    statusClass(){
+      return function(status){
+        return status === 0 ? 'disabled_status' : status === 1 ? 'normal_status' : status === 2 ? 'warning_status' : 'error_status'
+      }
+    }
+  },
   methods: {
-    gotoDetail() {
-      this.$router.push({
-        path: "/equipment/earTemperaturePumpDetail",
-        params: { a: 12 },
-      });
-      // this.$router.push('/equipment/mattress/detail')
-    },
+    gotoDetail(e){
+      const { userId, equipmentId } = e
+      if( userId && equipmentId ){
+        this.$router.push({
+          path: '/equipment/earTemperaturePumpDetail',
+          name: 'EarTemperaturePumpDetail',
+          params: {
+            userId,
+            equipmentId
+          }
+        })
+      }else{
+        this.$message({
+          type: 'warning',
+          message: '该设备暂无详细数据'
+        })
+      }
+    }
   },
 }
 </script>
@@ -64,15 +82,19 @@ export default {
     }
     .normal_status{
       background-color: #00c6bb;
+      color: #007a7f;
     }
     .warning_status{
       background-color: #ffb444;
+      color: #ce4c1b;
     }
     .error_status{
       background-color: #ff214b;
+      color: #ba0005;
     }
     .disabled_status {
       background-color: #bfbfbf;
+      color: #333333;
     }
 
     .item{

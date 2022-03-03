@@ -9,7 +9,11 @@
       <div class="right">
         <router-link :to="{
           path: '/equipment/fiberHistoryChart',
-          params: {a: 10}
+          name: 'FiberHistoryChart',
+          params: {
+            userId: this.userId,
+            equipmentId: this.equipmentId
+          }
         }"> 历史数据统计图 > </router-link>
       </div>
     </div>
@@ -23,6 +27,20 @@
 import * as echarts from "echarts"
 
 export default {
+  props: {
+    echartsData: {
+      type: Object,
+      default: ()=> {}
+    },
+    userId: {
+      type: Number,
+      default: null
+    },
+    equipmentId: {
+      type: Number,
+      default: null
+    }
+  },
   data() {
     return {
       option: {
@@ -42,7 +60,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: '50%',
-          data: ["14:00","05","10","15","20","25","30","35","40","45","50","55","15:00"]
+          data: []
         },
         yAxis: [
           {
@@ -57,7 +75,7 @@ export default {
           {
             name: "一通道",
             type: "line",
-            data: [120, 132, 101, 134, 90, 50, 30,120, 132, 101, 134, 90, 50],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -67,7 +85,7 @@ export default {
           {
             name: "二通道",
             type: "line",
-            data: [20, 82, 91, 24, 90, 33, 30,20, 82, 91, 24, 90, 33],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -77,7 +95,7 @@ export default {
           {
             name: "三通道",
             type: "line",
-            data: [123,45,56,123,45,34,56,66,34,68,34,79,78],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -87,7 +105,7 @@ export default {
           {
             name: "四通道",
             type: "line",
-            data: [60,89,34,89,94,72,83,85,38,94,323,95,96],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -98,6 +116,20 @@ export default {
       }
     }
   },
+  watch: {
+    echartsData: {
+      handler(){
+        const { countFirstT, countSecondT, countThirdT, countFourT, time } = this.echartsData
+        this.option.xAxis.data = time
+        this.option.series[0].data = countFirstT
+        this.option.series[1].data = countSecondT
+        this.option.series[2].data = countThirdT
+        this.option.series[3].data = countFourT
+        this.initEcharts()
+      },
+      deep: true
+    }
+  },
   methods: {
     initEcharts() {
       const chartDom = this.$refs.echarts;
@@ -105,7 +137,7 @@ export default {
     },
   },
   mounted() {
-    this.initEcharts();
+    
   },
 };
 </script>

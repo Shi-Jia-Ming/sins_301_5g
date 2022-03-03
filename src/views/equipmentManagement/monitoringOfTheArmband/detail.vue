@@ -4,15 +4,15 @@
     <div class="leftCon">
       <!-- 基本信息 -->
       <div class="info">
-        <BasicInfo />
+        <BasicInfo :basicData="basicData" />
       </div>
       <!-- 统计图 -->
       <div class="summaryGraph">
-        <SummaryGraph />
+        <SummaryGraph :time="echartsTime" :temperature="echartsTemperature" :heartRate="echartsHeartRate" :userId="userId" :equipmentId="equipmentId" />
       </div>
     </div>
     <div class="rightCon">
-      <OtherInfo />
+      <OtherInfo :equipmentInfo="equipmentInfo" :userInfo="userInfo" />
     </div>
   </div>
 </template>
@@ -21,6 +21,7 @@
 import BasicInfo from './components/basicInfo.vue'
 import SummaryGraph from './components/summaryGraph.vue'
 import OtherInfo from './components/otherInfo.vue'
+import request from '@/utils/request'
 
 export default {
   components: {
@@ -30,11 +31,79 @@ export default {
   },
   data() {
     return {
-      
+      userId: null,
+      equipmentId: null,
+      userInfo: {},
+      equipmentInfo: {},
+      // prop echarts data
+      echartsTime: [],
+      echartsTemperature: [],
+      echartsHeartRate: [],
+      // prop basicInfo data
+      basicData: {}
+    }
+  },
+  methods: {
+    getDetailData(userId, equipmentId){
+      return request({
+        url: 'arm/findUserInfoAndEquipmentInfo',
+        methods: 'get',
+        params: {
+          userId,
+          equipmentId
+        }
+      })
+    },
+    getEchartsData(userId){
+      const myDate = new Date()
+      let timer = myDate.toISOString().substring(myDate.toISOString().indexOf('T'), -1)
+      return request({
+        url: 'arm/findLineChart',
+        method: 'post',
+        data: {
+          userId,
+          startTime: timer,
+          endTime: timer
+        }
+      })
+    },
+    getBasicData(userId){
+      return request({
+        url: 'arm/findDetailsInfo',
+        method: 'get',
+        params: {
+          userId
+        }
+      })
+    },
+    allRequest(){
+      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId)]
+      this.loading()
+      Promise.all(requestAll).then(res=>{
+        this.userInfo = res[0].data.userInfo
+        this.equipmentInfo = res[0].data.equipmentInfo
+        this.echartsTime = res[1].data.time
+        this.echartsTemperature = res[1].data.temperature
+        this.echartsHeartRate = res[1].data.heartRate
+        this.basicData = res[2].data
+      }).finally(_=>{
+        this.closeLoading()
+      })
     }
   },
   mounted(){
-    // console.log(this.$route.params)
+    this.userId = this.$route.params.userId
+    this.equipmentId = this.$route.params.equipmentId
+    // 判断是否带参数进入页面
+    if( !this.userId || !this.equipmentId ){
+      this.$message({
+        type: 'warning',
+        message: '无效参数'
+      })
+      this.$router.go(-1)
+    }else{
+      this.allRequest()
+    }
   }
 }
 </script>

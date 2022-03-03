@@ -6,60 +6,76 @@
       <span>{{title}}</span>
     </div>
     <div class="itemBox">
-      <div class="item error">
+      <div class="item" :class=" classStatus(basicData.firstChannelTemperatureStatus) ">
         <div class="top">
           <div class="left">腋温</div>
-          <div class="right">异常</div>
+          <div class="right">
+            {{ textStatus(basicData.firstChannelTemperatureStatus) }}
+          </div>
         </div>
         <div class="bot">
           <div class="left">
             <div>一通道</div>
-            <span>38.5</span>°C
+            <span>
+              {{ basicData.firstChannelTemperature }}
+            </span>°C
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-wenduji.png" />
           </div>
         </div>
       </div>
-      <div class="item normal">
+      <div class="item" :class=" classStatus(basicData.secondChannelTemperatureStatus) ">
         <div class="top">
           <div class="left">口腔</div>
-          <div class="right">正常</div>
+          <div class="right">
+            {{ textStatus(basicData.secondChannelTemperatureStatus) }}
+          </div>
         </div>
         <div class="bot">
           <div class="left">
             <div>二通道</div>
-            <span>36.5</span>°C
+            <span>
+              {{ basicData.secondChannelTemperature }}  
+            </span>°C
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-wenduji.png" />
           </div>
         </div>
       </div>
-      <div class="item error">
+      <div class="item" :class=" classStatus(basicData.thirdChannelTemperatureStatus) ">
         <div class="top">
           <div class="left">肛温</div>
-          <div class="right">正常</div>
+          <div class="right">
+            {{ textStatus(basicData.thirdChannelTemperatureStatus) }}
+          </div>
         </div>
         <div class="bot">
           <div class="left">
             <div>三通道</div>
-            <span>36.5</span>°C
+            <span>
+              {{ basicData.thirdChannelTemperature }}  
+            </span>°C
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-wenduji.png" />
           </div>
         </div>
       </div>
-      <div class="item normal">
+      <div class="item" :class=" classStatus(basicData.fourthChannelTemperatureStatus) ">
         <div class="top">
           <div class="left">耳蜗</div>
-          <div class="right">异常</div>
+          <div class="right">
+            {{ textStatus(basicData.fourthChannelTemperatureStatus) }}
+          </div>
         </div>
         <div class="bot">
           <div class="left">
             <div>四通道</div>
-            <span>36.5</span>°C
+            <span>
+              {{ basicData.fourthChannelTemperature }}
+            </span>°C
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-wenduji.png" />
@@ -76,10 +92,56 @@ export default {
   components: {
     countTo
   },
+  computed: {
+    textStatus(){
+      return function(temperature){
+        let text = ''
+        switch(temperature){
+          case 0:
+            text = '暂无数据'
+            break;
+          case 1:
+            text = '正常'
+            break;
+          case 2:
+            text = '警告'
+            break;
+          case 3:
+            text = '异常'
+            break;
+        }
+        return text
+      }
+    },
+    classStatus(){
+      return function(temperature){
+        let text = ''
+        switch(temperature){
+          case 0:
+            text = 'disable'
+            break;
+          case 1:
+            text = 'normal'
+            break;
+          case 2:
+            text = 'warning'
+            break;
+          case 3:
+            text = 'error'
+            break;
+        }
+        return text
+      }
+    }
+  },
   props: {
     title: {
       type: String,
       default: '基本信息'
+    },
+    basicData: {
+      type: Object,
+      default: ()=> {}
     }
   },
   data() {
@@ -154,6 +216,11 @@ export default {
       }
     }
   }
+  .disable{
+    background-color: #bfbfbf;
+    color: #333333;
+  }
+
   .normal{
     background-color: #f1fcff;
     color: #00a399;

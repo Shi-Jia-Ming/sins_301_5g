@@ -1,15 +1,13 @@
 <template>
   <div class="itemBox">
-    <div v-for="item in dataList" :key="item" class="item" @click="gotoDetail">
-      <div class="top normal_status">
+    <div v-for="item in dataList" :key="item.userId" class="item" @click="gotoDetail(item)">
+      <div class="top" :class="statusClass(item.status)">
         <div class="avatar">
-          <img
-            src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-          />
+          <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" />
         </div>
         <div class="info">
-          <div class="name">YouLi</div>
-          <div class="number">KT2-H13354</div>
+          <div class="name">{{ item.status ? item.userName : '无人在床' }}</div>
+          <div class="number">{{ item.status ? item.equipmentCode : '' }}</div>
         </div>
       </div>
       <div class="bot">
@@ -18,18 +16,22 @@
             <div class="list_icon">
               <i class="iconfont iconzuji"></i>
             </div>
-            <div class="text">0103</div>
+            <div class="text">
+              {{item.stepNumber}}
+            </div>
           </div>
-          <div class="tip_text">体温偏高</div>
+          <div class="tip_text">
+            {{ temperatureStatus(item.status) }}
+          </div>
         </div>
         <div class="list lx_flex">
           <div class="list_flex">
             <img src="@/assets/icon_images/icon-wenduji.png" />
-            <span>36.5°C</span>
+            <span>{{ item.temperature }}°C</span>
           </div>
           <div class="list_flex">
             <img src="@/assets/icon_images/icon-xinlv.png" />
-            <span>100bmp</span>
+            <span>{{ item.heartRate }}bmp</span>
           </div>
         </div>
       </div>
@@ -45,14 +47,52 @@ export default {
       default: () => [],
     },
   },
-  methods: {
-    gotoDetail() {
-      this.$router.push({
-        path: "/equipment/armbandDetail",
-        params: { a: 12 },
-      });
-      // this.$router.push('/equipment/mattress/detail')
+  computed: {
+    statusClass(){
+      return function(status){
+        return status === 0 ? 'disabled_status' : status === 1 ? 'normal_status' : status === 2 ? 'warning_status' : 'error_status'
+      }
     },
+    temperatureStatus(){
+      return function(status){
+        let text = ''
+        switch(status){
+          case 0:
+            text = ''
+            break;
+          case 1:
+            text = '正常'
+            break;
+          case 2:
+            text = '警告'
+            break;
+          case 3:
+            text = '异常'
+            break;
+        }
+        return text
+      }
+    }
+  },
+  methods: {
+    gotoDetail(e){
+      const { userId, equipmentId } = e
+      if( userId && equipmentId ){
+        this.$router.push({
+          path: '/equipment/armbandDetail',
+          name: 'ArmbandDetail',
+          params: {
+            userId,
+            equipmentId
+          }
+        })
+      }else{
+        this.$message({
+          type: 'warning',
+          message: '该设备暂无详细数据'
+        })
+      }
+    }
   },
 };
 </script>
@@ -66,14 +106,22 @@ export default {
     display: block;
     clear: both;
   }
-  .normal_status {
+
+  .normal_status{
     background-color: #00c6bb;
+    color: #007a7f;
   }
-  .warning_status {
+  .warning_status{
     background-color: #ffb444;
+    color: #ce4c1b;
   }
-  .error_status {
+  .error_status{
     background-color: #ff214b;
+    color: #ba0005;
+  }
+  .disabled_status {
+    background-color: #bfbfbf;
+    color: #333333;
   }
 
   .item {

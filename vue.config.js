@@ -6,7 +6,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = 'vue Admin Template' // page title
+const name = '301-5G医疗实验室' // page title
 
 // 如果你的端口设置为 80，
 // 使用管理员权限执行命令行。

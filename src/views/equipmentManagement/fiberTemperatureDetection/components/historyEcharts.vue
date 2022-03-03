@@ -14,16 +14,18 @@
       <div class="date">
         <el-date-picker
           v-model="dateValue"
-          type="daterange"
+          :type="dateType"
           range-separator="至"
           start-placeholder="开始时间"
           end-placeholder="结束时间"
+          value-format="yyyy-MM-dd"
           size="small"
+          @change="handleDate"
         >
         </el-date-picker>
       </div>
     </div>
-    <div class="echarts">
+    <div class="echarts" v-loading="echartsLoading">
       <div ref="echarts"></div>
     </div>
   </div>
@@ -31,12 +33,14 @@
 
 <script>
 import * as echarts from 'echarts'
+import request from '@/utils/request'
 
 export default {
   data(){
     return {
-      dateTypeArr: ['日', '月', '年'],
+      dateTypeArr: ['日', '月'],
       current: 0,
+      dateType: 'daterange',
       dateValue: '',
       // echarts配置项
       option: {
@@ -56,7 +60,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: '50%',
-          data: ["14:00","05","10","15","20","25","30","35","40","45","50","55","15:00"]
+          data: []
         },
         yAxis: [
           {
@@ -71,7 +75,7 @@ export default {
           {
             name: "一通道",
             type: "line",
-            data: [120, 132, 101, 134, 90, 50, 30,120, 132, 101, 134, 90, 50],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -81,7 +85,7 @@ export default {
           {
             name: "二通道",
             type: "line",
-            data: [20, 82, 91, 24, 90, 33, 30,20, 82, 91, 24, 90, 33],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -91,7 +95,7 @@ export default {
           {
             name: "三通道",
             type: "line",
-            data: [123,45,56,123,45,34,56,66,34,68,34,79,78],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -101,7 +105,7 @@ export default {
           {
             name: "四通道",
             type: "line",
-            data: [60,89,34,89,94,72,83,85,38,94,323,95,96],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -109,20 +113,79 @@ export default {
             }
           }
         ]
-      }
+      },
+      echartsLoading: false,
+      exampleEcharts: null
+    }
+  },
+  props: {
+    echartsData: {
+      type: Object,
+      default: ()=> {}
+    },
+    userId: {
+      type: Number,
+      default: null
+    }
+  },
+  watch: {
+    echartsData: {
+      handler(){
+        const { countFirstT, countSecondT, countThirdT, countFourT, time } = this.echartsData
+        this.option.xAxis.data = time
+        this.option.series[0].data = countFirstT
+        this.option.series[1].data = countSecondT
+        this.option.series[2].data = countThirdT
+        this.option.series[3].data = countFourT
+        this.initEcharts()
+      },
+      deep: true
     }
   },
   methods: {
     toggleType(e){
       this.current = e
+      switch(e){
+        case 0:
+          this.dateType = 'daterange'
+          break;
+        case 1:
+          this.dateType = 'monthrange'
+          break;
+      }
     },
     initEcharts() {
       const chartDom = this.$refs.echarts;
-      echarts.init(chartDom).setOption(this.option);
+      this.exampleEcharts = echarts.init(chartDom)
+      this.exampleEcharts.setOption(this.option);
+    },
+    handleDate(){
+      if( !this.dateValue ) return false
+      const [startTime, endTime] = this.dateValue
+      this.echartsLoading = true
+      request({
+        url: 'fiber/findLineChart',
+        method: 'post',
+        data: {
+          userId: this.userId,
+          startTime,
+          endTime
+        }
+      }).then(res=>{
+        const { countFirstT, countSecondT, countThirdT, countFourT, time } = res.data
+        this.option.xAxis.data = time
+        this.option.series[0].data = countFirstT
+        this.option.series[1].data = countSecondT
+        this.option.series[2].data = countThirdT
+        this.option.series[3].data = countFourT
+        this.exampleEcharts.setOption(this.option, true)
+      }).finally(_=>{
+        this.echartsLoading = false
+      })
     }
   },
   mounted() {
-    this.initEcharts();
+    
   }
 }
 </script>

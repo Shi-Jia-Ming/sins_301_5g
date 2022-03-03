@@ -14,24 +14,26 @@
       </div>
       <div class="content">
         <div class="list">
-          <div class="text">姓名：</div>
-          <div class="val">Youli</div>
+          <div class="text">
+            姓名：
+          </div>
+          <div class="val">{{ userInfo.userName }}</div>
         </div>
         <div class="list">
           <div class="text">性别：</div>
-          <div class="val">男</div>
+          <div class="val">{{ userInfo.sex === 1 ? '男' : '女' }}</div>
         </div>
         <div class="list">
           <div class="text">血型：</div>
-          <div class="val">O</div>
+          <div class="val">{{ userInfo.bloodType }}</div>
         </div>
         <div class="list">
           <div class="text">身高：</div>
-          <div class="val">180cm</div>
+          <div class="val">{{ userInfo.height }}cm</div>
         </div>
         <div class="list">
           <div class="text">年龄：</div>
-          <div class="val">23</div>
+          <div class="val">{{ userInfo.age }}</div>
         </div>
       </div>
     </div>
@@ -47,11 +49,15 @@
         <div class="leftCon">
           <div class="list">
             <div class="text">设备名称：</div>
-            <div class="val">HF2-4240</div>
+            <div class="val">
+              {{ equipmentInfo.equipmentName }}
+            </div>
           </div>
           <div class="list">
             <div class="text">设备编号：</div>
-            <div class="val">4534343LH</div>
+            <div class="val">
+              {{ equipmentInfo.equipmentCode }}
+            </div>
           </div>
         </div>
         <div class="rightCon">
@@ -74,11 +80,11 @@
         </div>
         <div class="list warning">
           <div class="text">偏高：</div>
-          <div class="val">150 < HR ≤ 180bpm</div>
+          <div class="val">150 &lt; HR ≤ 180bpm</div>
         </div>
         <div class="list error">
           <div class="text">异常：</div>
-          <div class="val">HR > 180bpm</div>
+          <div class="val">HR &gt; 180bpm</div>
         </div>
       </div>
     </div>
@@ -97,11 +103,11 @@
         </div>
         <div class="list warning">
           <div class="text">偏高：</div>
-          <div class="val">37.5°C<T≤38.5°C</div>
+          <div class="val">37.5°C&lt;T≤38.5°C</div>
         </div>
         <div class="list error">
           <div class="text">异常：</div>
-          <div class="val">T>38.5°C T<35°C</div>
+          <div class="val">T&gt;38.5°C T&lt;35°C</div>
         </div>
       </div>
     </div>
@@ -112,6 +118,16 @@
 export default {
   data() {
     return {};
+  },
+  props: {
+    userInfo: {
+      type: Object,
+      default: ()=> {}
+    },
+    equipmentInfo: {
+      type: Object,
+      default: ()=> {}
+    }
   },
   methods: {
     

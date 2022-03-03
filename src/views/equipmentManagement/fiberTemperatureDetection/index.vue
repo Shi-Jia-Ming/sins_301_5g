@@ -7,14 +7,32 @@
 
 <script>
 import Item from "./components/item.vue"
+import request from '@/utils/request'
+
 export default {
   components: {
     Item
   },
   data() {
     return {
-      dataList: [1, 2, 3, 4, 5, 6]
+      dataList: []
     }
+  },
+  methods: {
+    getItemData(){
+      this.loading()
+      request({
+        url: 'fiber/findBaseInfo',
+        method: 'get'
+      }).then(res=>{
+        this.dataList = res.data
+      }).finally(_=>{
+        this.closeLoading()
+      })
+    }
+  },
+  mounted(){
+    this.getItemData()
   }
 }
 </script>

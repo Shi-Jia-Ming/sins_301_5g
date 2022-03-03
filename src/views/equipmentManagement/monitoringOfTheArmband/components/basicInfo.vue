@@ -6,31 +6,48 @@
       <span>{{title}}</span>
     </div>
     <div class="itemBox">
-      <div class="item normal">
+      <div class="item" :class=" basicData.heartRateStatus === 1 ? 'normal' : basicData.heartRateStatus === 2 ? 'warning' : 'error' ">
         <div class="top">
           <div class="left">心率</div>
-          <div class="right">正常</div>
+          <div class="right">
+            {{ basicData.heartRateStatus === 1 ? '正常' : basicData.heartRateStatus === 2 ? '警告' : '异常' }}
+          </div>
         </div>
         <div class="bot">
           <div class="left">
-            <span><countTo :startVal='0' :endVal='103' :duration='3000' /></span>bpm
+            <span><countTo :startVal='0' :endVal='basicData.heartRate' :duration='3000' /></span>bpm
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-xinlv.png" />
           </div>
         </div>
       </div>
-      <div class="item warning">
+      <div class="item" :class=" basicData.temperatureStatus === 1 ? 'normal' : basicData.temperatureStatus === 2 ? 'warning' : 'error' ">
         <div class="top">
           <div class="left">体温</div>
-          <div class="right">偏高</div>
+          <div class="right">
+            {{ basicData.temperatureStatus === 1 ? '正常' : basicData.temperatureStatus === 2 ? '警告' : '异常' }}
+          </div>
         </div>
         <div class="bot">
           <div class="left">
-            <span>37.1</span>°C
+            <span>{{ basicData.temperature }}</span>°C
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-wenduji.png" />
+          </div>
+        </div>
+      </div>
+      <div class="item normal">
+        <div class="top">
+          <div class="left">步数</div>
+        </div>
+        <div class="bot">
+          <div class="left">
+            <span><countTo :startVal='0' :endVal='basicData.stepNumber' :duration='3000' /></span>步
+          </div>
+          <div class="right">
+            <img src="@/assets/icon_images/icon-bushu.png" />
           </div>
         </div>
       </div>
@@ -48,6 +65,10 @@ export default {
     title: {
       type: String,
       default: '基本信息'
+    },
+    basicData: {
+      type: Object,
+      default: ()=> {}
     }
   },
   data() {
