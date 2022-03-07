@@ -135,11 +135,8 @@ export default {
       const chartDom = this.$refs.echarts;
       echarts.init(chartDom).setOption(this.option);
     },
-  },
-  mounted() {
-    
-  },
-};
+  }
+}
 </script>
 
 <style lang="scss" scoped>

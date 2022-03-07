@@ -34,16 +34,26 @@ export default {
       // prop basicInfo data
       basicData: {},
       // prop echarts data
-      echartsData: {}
+      echartsData: {},
+      // 轮循
+      timer: null
     }
   },
   methods: {
+    // 轮循方法
+    timerBasicData(){
+      this.getBasicData(this.userId).then(({data}) =>{
+        this.basicData = data
+      })
+    },
     getBasicData(userId){
+      const timestamp = Date.parse(new Date())
       return request({
         url: 'mattress/findBreatheAndHR',
         method: 'get',
         params: {
-          userId
+          userId,
+          timestamp
         }
       })
     },
@@ -76,12 +86,21 @@ export default {
       this.userId = this.$route.params.userId
       this.equipmentId = this.$route.params.equipmentId
       this.allRequest()
+      this.timer = setInterval(_ => {
+        this.timerBasicData()
+      }, 10000)
     }else{
       this.$message({
         type: 'warning',
         message: '无效参数'
       })
       this.$router.go(-1)
+    }
+  },
+  beforeDestroy(){
+    this.closeLoading()
+    if( this.timer ){
+      clearInterval(this.timer)
     }
   }
 }

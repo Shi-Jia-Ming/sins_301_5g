@@ -9,7 +9,11 @@
       <div class="right">
         <router-link :to="{
           path: '/equipment/earTemperatureHistoryChart',
-          params: {a: 10}
+          name: 'EarTemperatureHistoryChart',
+          params: {
+            userId: this.userId,
+            equipmentId: this.equipmentId
+          }
         }"> 历史数据统计图 > </router-link>
       </div>
     </div>
@@ -23,6 +27,20 @@
 import * as echarts from "echarts"
 
 export default {
+  props: {
+    echartsData: {
+      type: Object,
+      default: ()=> {}
+    },
+    userId: {
+      type: Number,
+      default: null
+    },
+    equipmentId: {
+      type: Number,
+      default: null
+    }
+  },
   data() {
     return {
       option: {
@@ -42,7 +60,7 @@ export default {
         xAxis: {
           type: "category",
           boundaryGap: '50%',
-          data: ["14:00","05","10","15","20","25","30","35","40","45","50","55","15:00"]
+          data: []
         },
         yAxis: [
           {
@@ -54,7 +72,7 @@ export default {
           {
             name: "体温",
             type: "line",
-            data: [120, 132, 101, 134, 90, 50, 30,120, 132, 101, 134, 90, 50],
+            data: [],
             symbol: 'circle',
             smooth: true,
             itemStyle: {
@@ -65,6 +83,17 @@ export default {
       }
     }
   },
+  watch: {
+    echartsData: {
+      handler(){
+        const { temperature, time } = this.echartsData
+        this.option.xAxis.data = time
+        this.option.series[0].data = temperature
+        this.initEcharts()
+      },
+      deep: true
+    }
+  },
   methods: {
     initEcharts() {
       const chartDom = this.$refs.echarts;
@@ -72,7 +101,7 @@ export default {
     },
   },
   mounted() {
-    this.initEcharts();
+    
   },
 };
 </script>

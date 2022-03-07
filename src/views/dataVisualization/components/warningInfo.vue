@@ -1,6 +1,6 @@
 <!-- 预警消息 -->
 <template>
-  <div class="box">
+  <div class="box" v-loading="warnInfoLoading">
     <div class="title">
       <i class="iconfont iconyujing1"></i>
       <span>预警信息</span>
@@ -16,10 +16,10 @@
         <vueSeamlessScroll :data="listData" :class-option="defaultOption">
           <div class="con">
             <div class="list" v-for="(item, index) in listData" :key="index">
-              <div class="date">{{ item.date }}</div>
-              <div class="name">{{ item.name }}</div>
-              <div class="category">{{ item.category }}</div>
-              <div class="condition">{{ item.condition }}</div>
+              <div class="date">{{ item.time }}</div>
+              <div class="name">{{ item.userName }}</div>
+              <div class="category">{{ item.abnormalType }}</div>
+              <div class="condition">{{ item.info }}</div>
             </div>
           </div>
         </vueSeamlessScroll>
@@ -29,7 +29,7 @@
 </template>
 
 <script>
-import vueSeamlessScroll from "vue-seamless-scroll";
+import vueSeamlessScroll from "vue-seamless-scroll"
 
 export default {
   components: {
@@ -49,109 +49,17 @@ export default {
       };
     },
   },
-  data() {
-    return {
-      listData: [
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-        {
-          date: "2020-01-02",
-          name: "Youli",
-          category: "体温异常", // 异常类别
-          condition: "处理完成",
-        },
-      ],
-    };
-  },
-};
+  props: {
+    listData: {
+      type: Array,
+      default: ()=> []
+    },
+    warnInfoLoading: {
+      type: Boolean,
+      default: false
+    }
+  }
+}
 </script>
 
 <style lang="scss" scoped>
@@ -230,5 +138,9 @@ export default {
       }
     }
   }
+}
+.box ::v-deep .el-loading-mask{
+  background-color: unset;
+  border-radius: 10px;
 }
 </style>

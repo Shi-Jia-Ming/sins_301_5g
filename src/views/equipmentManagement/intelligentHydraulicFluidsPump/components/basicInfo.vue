@@ -6,22 +6,22 @@
       <span>{{title}}</span>
     </div>
     <div class="itemBox">
-      <div class="item normal">
+      <div class="item" :class=" classStatus(basicData.status) ">
         <div class="leftCon">
           <div class="top">
             <div class="icon">
               <i class="iconfont iconshuyederen"></i>
             </div>
-            <div class="name">XXXXXX床位</div>
+            <div class="name">{{ basicData.userInfo && basicData.userInfo.userName }}</div>
           </div>
           <div class="bot">
             <div class="module">
               <div class="module_title">
-                总量
+                总量/已输液量
               </div>
               <div class="module_val">
-                <countTo :startVal='0' :endVal='500' :duration='3000' />ML/
-                <countTo :startVal='0' :endVal='264' :duration='3000' />ML
+                <countTo :startVal='0' :endVal='basicData.totalLiquid' :duration='3000' />ML/
+                <countTo :startVal='0' :endVal='basicData.alreadyLiquid' :duration='3000' />ML
               </div>
             </div>
             <div class="module">
@@ -29,7 +29,7 @@
                 输液速度
               </div>
               <div class="module_val">
-                <countTo :startVal='0' :endVal='100' :duration='3000' />ML/H
+                <countTo :startVal='0' :endVal='basicData.speed' :duration='3000' />ML/H
               </div>
             </div>
             <div class="module">
@@ -37,18 +37,23 @@
                 剩余时间
               </div>
               <div class="module_val">
-                <countTo :startVal='0' :endVal='72' :duration='3000' />min
+                <!-- <countTo :startVal='0' :endVal='72' :duration='3000' />min -->
+                {{ basicData.residueTime }}
               </div>
             </div>
           </div>
         </div>
         <div class="rightCon">
-          无异常
+          {{ basicData.status === 0 ? '无人在床' : basicData.status === 1 ? '无异常' : '异常' }}
         </div>
       </div>
       <div class="operate">
-        <el-button type="primary" disabled>输液中...</el-button>
-        <el-button type="success">暂停</el-button>
+        <div class="status">
+          {{ InfusionStatus(basicData) }}
+        </div>
+        <div class="operateBtn">
+          暂停
+        </div>
       </div>
     </div>
   </div>
@@ -60,15 +65,52 @@ export default {
   components: {
     countTo
   },
+  computed: {
+    InfusionStatus(){
+      return (item)=> {
+        let text = ''
+        if( item.status ){
+          if( item.speed !== 0 ){
+            text = '输液中'
+          }else{
+            text = '待机'
+          }
+        }else{
+          text = '空闲'
+        }
+        return text
+      }
+    },
+    classStatus(){
+      return function(temperature){
+        let text = ''
+        switch(temperature){
+          case 0:
+            text = 'disable'
+            break;
+          case 1:
+            text = 'normal'
+            break;
+          case 2:
+            text = 'warning'
+            break;
+          case 3:
+            text = 'error'
+            break;
+        }
+        return text
+      }
+    }
+  },
   props: {
     title: {
       default: '基本信息'
+    },
+    basicData: {
+      type: Object,
+      default: ()=> {}
     }
-  },
-  data() {
-    return {}
-  },
-  mounted() {}
+  }
 }
 </script>
 
@@ -89,6 +131,7 @@ export default {
 .itemBox{
   display: flex;
   justify-content: space-between;
+  align-items: flex-start;
   margin-top: 15px;
   .item{
     height: 110px;
@@ -150,6 +193,40 @@ export default {
       }
     }
   }
+  .operate{
+    display: flex;
+    div{
+      padding: 10px 16px;
+      font-weight: 500;
+      line-height: 1;
+      white-space: nowrap;
+      cursor: pointer;
+      border-radius: 5px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: #FFF;
+      margin-left: 10px;
+      transition: 0.3s;
+    }
+    .status{
+      background-color: #5188ff;
+      border: 1px solid #5188ff;
+      &:hover{
+        background-color: #FFF;
+        color: #5188ff;
+      }
+    }
+    .operateBtn{
+      background-color: #2ed42a;
+      border: 1px solid #2ed42a;
+      &:hover{
+        background-color: #FFF;
+        color: #2ed42a;
+      }
+    }
+  }
+
   .normal{
     background-color: #f1fcff;
     color: #00a399;

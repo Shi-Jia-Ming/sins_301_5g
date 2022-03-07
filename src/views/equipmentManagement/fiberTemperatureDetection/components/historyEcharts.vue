@@ -183,9 +183,6 @@ export default {
         this.echartsLoading = false
       })
     }
-  },
-  mounted() {
-    
   }
 }
 </script>

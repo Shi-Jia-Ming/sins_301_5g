@@ -1,5 +1,5 @@
 <template>
-  <div class="item">
+  <div class="item" v-loading="itemLoading">
     <div class="title">
       {{title}}
     </div>
@@ -33,6 +33,7 @@
 
 <script>
 import countTo from 'vue-count-to'
+import request from '@/utils/request'
 
 export default {
   components: {
@@ -41,19 +42,33 @@ export default {
   props: {
     title: {
       type: String,
-      default: '测试'
+      default: ''
     },
-    normalData: {
-      type: Number,
-      default: 312019
+    propData: {
+      type: Object,
+      default: ()=> {}
     },
-    warningData: {
-      type: Number,
-      default: 20
-    },
-    errorData: {
-      type: Number,
-      default: 30
+    itemLoading: {
+      type: Boolean,
+      default: false
+    }
+  },
+  data(){
+    return {
+      normalData: null,
+      warningData: null,
+      errorData: null
+    }
+  },
+  watch: {
+    propData: {
+      handler(){
+        const { abnormal, normal, warn } = this.propData
+        this.normalData = normal
+        this.warningData = warn
+        this.errorData = abnormal
+      },
+      deep: true
     }
   },
   computed: {
@@ -171,5 +186,9 @@ export default {
       }
     }
   }
+}
+.item ::v-deep .el-loading-mask{
+  background-color: unset;
+  border-radius: 10px;
 }
 </style>

@@ -6,14 +6,16 @@
       <span>{{title}}</span>
     </div>
     <div class="itemBox">
-      <div class="item normal">
+      <div class="item" :class=" classStatus(basicData.temperatureStatus) ">
         <div class="top">
           <div class="left">体温</div>
-          <div class="right">正常</div>
+          <div class="right">
+            {{ basicData.temperatureStatus === 0 ? '' : basicData.temperatureStatus === 1 ? '正常' : basicData.temperatureStatus === 2 ? '警告' : '异常' }}
+          </div>
         </div>
         <div class="bot">
           <div class="left">
-            <span>38.5</span>°C
+            <span>{{ basicData.temperature }}</span>°C
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-wenduji.png" />
@@ -30,10 +32,36 @@ export default {
   components: {
     countTo
   },
+  computed: {
+    classStatus(){
+      return function(temperature){
+        let text = ''
+        switch(temperature){
+          case 0:
+            text = 'disable'
+            break;
+          case 1:
+            text = 'normal'
+            break;
+          case 2:
+            text = 'warning'
+            break;
+          case 3:
+            text = 'error'
+            break;
+        }
+        return text
+      }
+    }
+  },
   props: {
     title: {
       type: String,
       default: '基本信息'
+    },
+    basicData: {
+      type: Object,
+      default: ()=> {}
     }
   },
   data() {

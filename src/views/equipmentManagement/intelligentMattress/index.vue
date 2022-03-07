@@ -16,28 +16,40 @@ export default {
   data() {
     return {
       dataList: [],
-    };
+      timer: null
+    }
   },
   methods: {
-    getListData() {
+    getItemData(){
+      // 获取时间戳
+      const timestamp = Date.parse(new Date())
       this.loading()
       request({
-        url: "mattress/findBaseInfo",
-        method: "get"
-      }).then(res => {
-        this.dataList = res.data
+        url: 'mattress/findBaseInfo',
+        method: 'get',
+        params: {
+          timestamp
+        }
+      }).then(({data})=>{
+        this.dataList = data
       }).finally(_=>{
         this.closeLoading()
       })
-    },
+    }
   },
-  mounted() {
-    this.getListData();
+  mounted(){
+    this.getItemData()
+    this.timer = setInterval(_ => {
+      this.getItemData()
+    }, 10000)
   },
-  beforeDestroy(){
+  beforeDestroy() {
     this.closeLoading()
+    if( this.timer ){
+      clearInterval(this.timer)
+    }
   }
-};
+}
 </script>
 
 <style lang="scss" scoped>

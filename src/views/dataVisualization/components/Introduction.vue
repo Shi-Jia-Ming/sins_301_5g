@@ -5,12 +5,12 @@
       <div class="date">{{currentDate}}</div>
       <div class="time">{{timer}}</div>
     </div>
-    <div class="introduction">
+    <div class="introduction" v-loading="introductionLoading">
       <div class="title">
         实验室简介
       </div>
       <div class="content">
-        中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院中国人民解放军总医院
+        {{ content }}
       </div>
     </div>
   </div>
@@ -24,6 +24,16 @@ export default {
       let date = myDate.toISOString()
       date = date.substring(date.indexOf('T'), -1)
       return date
+    }
+  },
+  props: {
+    introductionLoading: {
+      type: Boolean,
+      default: false
+    },
+    content: {
+      type: String,
+      default: ''
     }
   },
   data() {
@@ -95,5 +105,9 @@ export default {
       letter-spacing: 0.1em;
     }
   }
+}
+.box ::v-deep .el-loading-mask{
+  background-color: unset;
+  border-radius: 10px;
 }
 </style>

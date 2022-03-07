@@ -1,33 +1,36 @@
 <template>
   <div class="itemBox">
-    <div v-for="item in dataList" :key="item" class="item" @click="gotoDetail">
-      <div class="top normal_status">
+    <div v-for="item in dataList" :key="item.userId" class="item" @click="gotoDetail(item)">
+      <div class="top" :class="statusClass(item.status)">
         <div class="avatar">
-          <img
-            src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500"
-          />
+          <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" />
         </div>
         <div class="info">
-          <div class="name">YouLi</div>
-          <div class="number">KT2-H13354</div>
+          <div class="name">{{ item.status ? item.userName : '无人在床' }}</div>
+          <div class="number">{{ item.status ? item.equipmentCode : '' }}</div>
         </div>
       </div>
       <div class="bot">
         <div class="list lx_flex">
           <div class="text">总量/已输液量（ML)</div>
-          <div class="number">500/0</div>
+          <div class="number">{{ item.totalLiquid }}/{{ item.alreadyLiquid }}</div>
         </div>
         <div class="list lx_flex">
           <div class="text">速度（ML/H）</div>
-          <div class="number">100</div>
+          <div class="number">{{ item.speed }}</div>
         </div>
         <div class="list lx_flex">
           <div class="text">剩余时间（H）</div>
-          <div class="number">100</div>
+          <div class="number">{{ item.residueTime }}</div>
         </div>
         <div class="list lx_flex">
-          <div class="earlyWarning text_error">气泡预警</div>
-          <div class="status">待机中</div>
+          <div class="earlyWarning" :class=" item.bubble ? 'text_normal' : 'text_error' ">
+            {{ item.bubble ? '' : '气泡预警' }}
+          </div>
+          <div class="status" :class=" item.block ? 'text_normal' : 'text_error' ">{{ item.block ? '' : '阻塞' }}</div>
+          <div class="status" :class=" item.block ? 'text_normal' : 'text_error' ">
+            {{ InfusionStatus(item) }}
+          </div>
         </div>
       </div>
     </div>
@@ -39,17 +42,50 @@ export default {
   props: {
     dataList: {
       type: Array,
-      default: () => [],
+      default: () => []
+    }
+  },
+  computed: {
+    statusClass(){
+      return function(status){
+        return status === 0 ? 'disabled_status' : status === 1 ? 'normal_status' : status === 2 ? 'warning_status' : 'error_status'
+      }
     },
+    InfusionStatus(){
+      return (item)=> {
+        let text = ''
+        if( item.status ){
+          if( item.speed !== 0 ){
+            text = '输液中'
+          }else{
+            text = '待机'
+          }
+        }else{
+          text = '空闲'
+        }
+        return text
+      }
+    }
   },
   methods: {
-    gotoDetail() {
-      this.$router.push({
-        path: "/equipment/infusionPumpDetail",
-        params: { a: 12 },
-      });
-      // this.$router.push('/equipment/mattress/detail')
-    },
+    gotoDetail(e){
+      const { userId, equipmentId } = e
+      if( userId && equipmentId ){
+        this.$router.push({
+          path: '/equipment/infusionPumpDetail',
+          name: 'InfusionPumpDetail',
+          params: {
+            userId,
+            equipmentId
+          }
+        })
+      }else{
+        this.$message({
+          type: 'warning',
+          message: '该设备暂无详细数据'
+        })
+      }
+    }
   },
 };
 </script>
@@ -63,17 +99,21 @@ export default {
     display: block;
     clear: both;
   }
-  .normal_status {
+  .normal_status{
     background-color: #00c6bb;
+    color: #007a7f;
   }
-  .warning_status {
+  .warning_status{
     background-color: #ffb444;
+    color: #ce4c1b;
   }
-  .error_status {
+  .error_status{
     background-color: #ff214b;
+    color: #ba0005;
   }
   .disabled_status {
     background-color: #bfbfbf;
+    color: #333333;
   }
 
   .item {
@@ -167,7 +207,9 @@ export default {
         .text_error {
           color: #ff214b;
         }
-
+        .text_normal {
+          color: #00c6bb;
+        }
         .text_warning {
           color: #ffb544;
         }

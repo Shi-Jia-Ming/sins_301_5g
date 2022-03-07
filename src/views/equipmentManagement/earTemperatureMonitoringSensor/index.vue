@@ -15,17 +15,23 @@ export default {
   },
   data() {
     return {
-      dataList: []
+      dataList: [],
+      timer: null
     }
   },
   methods: {
     getItemData(){
+      // 获取时间戳
+      const timestamp = Date.parse(new Date())
       this.loading()
       request({
         url: 'ear/findBaseInfo',
-        method: 'get'
-      }).then(res=>{
-        this.dataList = res.data
+        method: 'get',
+        params: {
+          timestamp
+        }
+      }).then(({data})=>{
+        this.dataList = data
       }).finally(_=>{
         this.closeLoading()
       })
@@ -33,6 +39,15 @@ export default {
   },
   mounted(){
     this.getItemData()
+    this.timer = setInterval(_ => {
+      this.getItemData()
+    }, 10000)
+  },
+  beforeDestroy() {
+    this.closeLoading()
+    if( this.timer ){
+      clearInterval(this.timer)
+    }
   }
 }
 </script>

@@ -10,24 +10,26 @@
       </div>
       <div class="content">
         <div class="list">
-          <div class="text">姓名：</div>
-          <div class="val">Youli</div>
+          <div class="text">
+            姓名：
+          </div>
+          <div class="val">{{ userInfo.userName }}</div>
         </div>
         <div class="list">
           <div class="text">性别：</div>
-          <div class="val">男</div>
+          <div class="val">{{ userInfo.sex === 1 ? '男' : '女' }}</div>
         </div>
         <div class="list">
           <div class="text">血型：</div>
-          <div class="val">O</div>
+          <div class="val">{{ userInfo.bloodType }}</div>
         </div>
         <div class="list">
           <div class="text">身高：</div>
-          <div class="val">180cm</div>
+          <div class="val">{{ userInfo.height }}cm</div>
         </div>
         <div class="list">
           <div class="text">年龄：</div>
-          <div class="val">23</div>
+          <div class="val">{{ userInfo.age }}</div>
         </div>
       </div>
     </div>
@@ -35,15 +37,15 @@
 </template>
 
 <script>
-import countTo from 'vue-count-to'
 export default {
-  components: {
-    countTo
-  },
   props: {
     title: {
       type: String,
       default: '基本信息'
+    },
+    userInfo: {
+      type: Object,
+      default: ()=> {}
     }
   },
   data() {

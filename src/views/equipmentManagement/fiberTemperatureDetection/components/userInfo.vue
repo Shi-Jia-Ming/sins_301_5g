@@ -37,11 +37,7 @@
 </template>
 
 <script>
-import countTo from 'vue-count-to'
 export default {
-  components: {
-    countTo
-  },
   props: {
     title: {
       type: String,

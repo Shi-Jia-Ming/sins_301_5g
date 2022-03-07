@@ -22,23 +22,7 @@ export const constantRoutes = [
   {
     path: '/',
     component: Layout,
-    redirect: '/dashboard',
-    children: [{
-      path: 'dashboard',
-      name: 'Dashboard',
-      component: () => import('@/views/dashboard/index'),
-      meta: { title: 'Dashboard', icon: 'dashboard' }
-    }]
-  },
-  {
-    path: '/dataVisualization',
-    component: () => import('@/views/dataVisualization/index'),
-    children: [
-      {
-        path: `${url}#/dataVisualization`,
-        meta: { title: '数据可视化', icon: 'dashboard' }
-      }
-    ]
+    redirect: '/equipment'
   },
   // 设备管理
   {
@@ -146,6 +130,16 @@ export const constantRoutes = [
         component: ()=> import('@/views/equipmentManagement/earTemperatureMonitoringSensor/historyChart'),
         hidden: true,
         meta: { title: '耳温监测传感器历史统计图' }
+      }
+    ]
+  },
+  {
+    path: '/dataVisualization',
+    component: () => import('@/views/dataVisualization/index'),
+    children: [
+      {
+        path: `${url}#/dataVisualization`,
+        meta: { title: '数据可视化', icon: 'dashboard' }
       }
     ]
   },
