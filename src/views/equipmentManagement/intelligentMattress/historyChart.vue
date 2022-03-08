@@ -60,13 +60,15 @@ export default {
     getEchartsData(userId){
       const myDate = new Date()
       let timer = myDate.toISOString().substring(myDate.toISOString().indexOf('T'), -1)
+      const timestamp = Date.parse(myDate)
       return request({
         url: 'mattress/findLineChart',
         method: 'post',
         data: {
           userId,
           startTime: timer,
-          endTime: timer
+          endTime: timer,
+          timestamp
         }
       })
     },

@@ -60,7 +60,7 @@ export default {
   },
   methods: {
     getItemData(timestamp){
-      this.itemLoading = true
+      this.itemLoading = false
       return request({
         url: 'equipment/dataScreen',
         method: 'get',
@@ -69,18 +69,15 @@ export default {
         }
       })
     },
-    getContext(timestamp){
-      this.introductionLoading = true
+    getContext(){
+      this.introductionLoading = false
       return request({
         url: 'equipment/findContext',
-        method: 'get',
-        params: {
-          timestamp
-        }
+        method: 'get'
       })
     },
     getAbnormalData(timestamp){
-      this.warnInfoLoading = true
+      this.warnInfoLoading = false
       return request({
         url: 'equipment/findAbnormalData',
         method: 'get',
@@ -91,7 +88,7 @@ export default {
     },
     allRequest(){
       const timestamp = Date.parse(new Date())
-      const requestArr = [this.getItemData(timestamp), this.getContext(timestamp), this.getAbnormalData(timestamp)]
+      const requestArr = [this.getItemData(timestamp), this.getContext(), this.getAbnormalData(timestamp)]
       Promise.all(requestArr).then(res=>{
         const { arm, ear, fiber, mattress, pump } = res[0]
         this.itemLoading = false
@@ -105,7 +102,6 @@ export default {
         this.content = res[1].data
 
         this.warnInfoLoading = false
-        console.log(res[2])
         this.listData = res[2].data
       })
     }

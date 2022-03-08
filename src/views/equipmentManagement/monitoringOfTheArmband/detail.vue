@@ -40,7 +40,9 @@ export default {
       echartsTemperature: [],
       echartsHeartRate: [],
       // prop basicInfo data
-      basicData: {}
+      basicData: {},
+      // 轮循
+      timer: null
     }
   },
   methods: {
@@ -57,22 +59,26 @@ export default {
     getEchartsData(userId){
       const myDate = new Date()
       let timer = myDate.toISOString().substring(myDate.toISOString().indexOf('T'), -1)
+      const timestamp = Date.parse(myDate)
       return request({
         url: 'arm/findLineChart',
         method: 'post',
         data: {
           userId,
           startTime: timer,
-          endTime: timer
+          endTime: timer,
+          timestamp
         }
       })
     },
     getBasicData(userId){
+      const timestamp = Date.parse(new Date())
       return request({
         url: 'arm/findDetailsInfo',
         method: 'get',
         params: {
-          userId
+          userId,
+          timestamp
         }
       })
     },
@@ -103,6 +109,15 @@ export default {
       this.$router.go(-1)
     }else{
       this.allRequest()
+      this.timer = setInterval(_ => {
+        this.allRequest()
+      }, 10000);
+    }
+  },
+  beforeDestroy(){
+    this.closeLoading()
+    if( this.timer ){
+      clearInterval(this.timer)
     }
   }
 }

@@ -36,29 +36,41 @@ export default {
       // prop echarts data
       echartsData: {},
       // prop userInfo data
-      userInfo: {}
+      userInfo: {},
+      // 轮循
+      timer: null
     }
   },
   methods: {
+    // 轮循方法
+    timerBasicData(){
+      this.getBasicData(this.userId).then(({data}) =>{
+        this.basicData = data
+      })
+    },
     getBasicData(userId){
+      const timestamp = Date.parse(new Date())
       return request({
         url: 'arm/findDetailsInfo',
         method: 'get',
         params: {
-          userId
+          userId,
+          timestamp
         }
       })
     },
     getEchartsData(userId){
       const myDate = new Date()
       let timer = myDate.toISOString().substring(myDate.toISOString().indexOf('T'), -1)
+      const timestamp = Date.parse(myDate)
       return request({
         url: 'arm/findLineChart',
         method: 'post',
         data: {
           userId,
           startTime: timer,
-          endTime: timer
+          endTime: timer,
+          timestamp
         }
       })
     },
@@ -89,12 +101,21 @@ export default {
       this.userId = this.$route.params.userId
       this.equipmentId = this.$route.params.equipmentId
       this.allRequest()
+      this.timer = setInterval(_ => {
+        this.timerBasicData()
+      }, 10000)
     }else{
       this.$message({
         type: 'warning',
         message: '无效参数'
       })
       this.$router.go(-1)
+    }
+  },
+  beforeDestroy(){
+    this.closeLoading()
+    if( this.timer ){
+      clearInterval(this.timer)
     }
   }
 }
