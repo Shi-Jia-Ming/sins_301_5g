@@ -17,11 +17,11 @@
           <div class="bot">
             <div class="module">
               <div class="module_title">
-                总量/已输液量
+                已输液量/总量
               </div>
               <div class="module_val">
-                <countTo :startVal='0' :endVal='basicData.totalLiquid' :duration='3000' />ML/
-                <countTo :startVal='0' :endVal='basicData.alreadyLiquid' :duration='3000' />ML
+                <countTo :startVal='0' :endVal='basicData.alreadyLiquid' :duration='3000' />ML/
+                <countTo :startVal='0' :endVal='basicData.totalLiquid' :duration='3000' />ML
               </div>
             </div>
             <div class="module">
@@ -51,9 +51,9 @@
         <div class="status">
           {{ InfusionStatus(basicData) }}
         </div>
-        <div class="operateBtn">
+        <!-- <div class="operateBtn">
           暂停
-        </div>
+        </div> -->
       </div>
     </div>
   </div>
@@ -200,30 +200,20 @@ export default {
       font-weight: 500;
       line-height: 1;
       white-space: nowrap;
-      cursor: pointer;
       border-radius: 5px;
       display: flex;
       justify-content: center;
       align-items: center;
       color: #FFF;
       margin-left: 10px;
-      transition: 0.3s;
     }
     .status{
       background-color: #5188ff;
       border: 1px solid #5188ff;
-      &:hover{
-        background-color: #FFF;
-        color: #5188ff;
-      }
     }
     .operateBtn{
       background-color: #2ed42a;
       border: 1px solid #2ed42a;
-      &:hover{
-        background-color: #FFF;
-        color: #2ed42a;
-      }
     }
   }
 

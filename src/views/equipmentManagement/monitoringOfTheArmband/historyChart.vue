@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="historyEcharts">
-      <historyEcharts :echartsData="echartsData" :userId="userId" />
+      <historyEcharts :echartsData="echartsData" :userId="userId" :equipmentId="equipmentId" />
     </div>
   </div>
 </template>
@@ -44,22 +44,23 @@ export default {
   methods: {
     // 轮循方法
     timerBasicData(){
-      this.getBasicData(this.userId).then(({data}) =>{
+      this.getBasicData(this.userId, this.equipmentId).then(({data}) =>{
         this.basicData = data
       })
     },
-    getBasicData(userId){
+    getBasicData(userId, equipmentId){
       const timestamp = Date.parse(new Date())
       return request({
         url: 'arm/findDetailsInfo',
         method: 'get',
         params: {
           userId,
-          timestamp
+          timestamp,
+          equipmentId
         }
       })
     },
-    getEchartsData(userId){
+    getEchartsData(userId, equipmentId){
       const myDate = new Date()
       let timer = myDate.toISOString().substring(myDate.toISOString().indexOf('T'), -1)
       const timestamp = Date.parse(myDate)
@@ -70,7 +71,8 @@ export default {
           userId,
           startTime: timer,
           endTime: timer,
-          timestamp
+          timestamp,
+          equipmentId
         }
       })
     },
@@ -85,7 +87,7 @@ export default {
       })
     },
     allRequest(){
-      const requestAll = [this.getBasicData(this.userId), this.getEchartsData(this.userId), this.getUserInfo(this.userId, this.equipmentId)]
+      const requestAll = [this.getBasicData(this.userId), this.getEchartsData(this.userId, this.equipmentId), this.getUserInfo(this.userId, this.equipmentId)]
       this.loading()
       Promise.all(requestAll).then(res=>{
         this.basicData = res[0].data

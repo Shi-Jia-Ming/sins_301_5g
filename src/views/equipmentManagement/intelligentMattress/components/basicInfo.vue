@@ -31,7 +31,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span><countTo :startVal='0' :endVal='basicData.breath' :duration='3000' /></span>次
+            <span><countTo :startVal='0' :endVal='basicData.breathe' :duration='3000' /></span>次
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-huxi.png" />
@@ -57,11 +57,7 @@ export default {
       type: Object,
       default: ()=> {}
     }
-  },
-  data() {
-    return {}
-  },
-  mounted() {}
+  }
 }
 </script>
 

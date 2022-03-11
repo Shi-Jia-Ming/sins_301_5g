@@ -29,4 +29,12 @@ export default {
     mask-size: contain;
   }
 }
+
+@media screen and (max-width: 1800px) {
+  .box{
+    height: 420px;
+    padding: 11px 26px 27px 26px;
+    background-size: 100% 100%;
+  }
+}
 </style>

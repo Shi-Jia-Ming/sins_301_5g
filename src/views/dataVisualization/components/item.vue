@@ -191,4 +191,51 @@ export default {
   background-color: unset;
   border-radius: 10px;
 }
+@media screen and (max-width: 1800px) {
+  .item{
+    height: 238px;
+    padding: 0 10px;
+    background-size: 100% 100%;
+    .title{
+      height: 55px;
+      font-size: 20px;
+    }
+    .total{
+      margin-top: 15px;
+      margin-left: 10px;
+      width: 60%;
+      div{
+        width: 20px;
+        height: 30px;
+        background-size: contain;
+        font-size: 20px;
+      }
+    }
+    .normal{
+      margin-top: 27px;
+      margin-left: 10px;
+      i{
+        font-size: 24px;
+      }
+      span{
+        font-size: 24px;
+        margin-left: 7px;
+      }
+    }
+    .bot{
+      margin-top: 30px;
+      margin-left: 10px;
+      .warning, .error{
+        i{
+          font-size: 24px;
+        }
+        span{
+          font-size: 24px;
+          margin-left: 7px;
+        }
+      }
+      
+    }
+  }
+}
 </style>

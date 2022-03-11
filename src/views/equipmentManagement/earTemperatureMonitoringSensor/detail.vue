@@ -69,19 +69,20 @@ export default {
         }
       })
     },
-    getBasicData(userId){
+    getBasicData(userId, equipmentId){
       const timestamp = Date.parse(new Date())
       return request({
         url: 'ear/findTemperature',
         method: 'get',
         params: {
           userId,
-          timestamp
+          timestamp,
+          equipmentId
         }
       })
     },
     allRequest(){
-      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId)]
+      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId, this.equipmentId)]
       this.loading()
       Promise.all(requestAll).then(res=>{
         this.userInfo = res[0].data.userInfo

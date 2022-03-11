@@ -29,4 +29,12 @@ export default {
     font-weight: bold;
   }
 }
+
+@media screen and (max-width: 1800px) {
+  .header{
+    .text{
+      font-size: 30px;
+    }
+  }
+}
 </style>

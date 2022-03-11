@@ -149,4 +149,13 @@ export default {
     }
   }
 }
+
+@media screen and (max-width: 1800px) {
+  #dataV{
+    padding: 15px 30px 5px;
+    .header{
+      height: 50px;
+    }
+  }
+}
 </style>

@@ -17,23 +17,23 @@
           <div class="text">
             姓名：
           </div>
-          <div class="val">{{ userInfo.userName }}</div>
+          <div class="val">{{ userInfo && userInfo.userName }}</div>
         </div>
         <div class="list">
           <div class="text">性别：</div>
-          <div class="val">{{ userInfo.sex === 1 ? '男' : '女' }}</div>
+          <div class="val">{{ userInfo && userInfo.sex === 1 ? '男' : '女' }}</div>
         </div>
         <div class="list">
           <div class="text">血型：</div>
-          <div class="val">{{ userInfo.bloodType }}</div>
+          <div class="val">{{ userInfo && userInfo.bloodType }}</div>
         </div>
         <div class="list">
           <div class="text">身高：</div>
-          <div class="val">{{ userInfo.height }}cm</div>
+          <div class="val">{{ userInfo && userInfo.height }}cm</div>
         </div>
         <div class="list">
           <div class="text">年龄：</div>
-          <div class="val">{{ userInfo.age }}</div>
+          <div class="val">{{ userInfo && userInfo.age }}</div>
         </div>
       </div>
     </div>
@@ -50,13 +50,13 @@
           <div class="list">
             <div class="text">设备名称：</div>
             <div class="val">
-              {{ equipmentInfo.equipmentName }}
+              {{ equipmentInfo && equipmentInfo.equipmentName }}
             </div>
           </div>
           <div class="list">
             <div class="text">设备编号：</div>
             <div class="val">
-              {{ equipmentInfo.equipmentCode }}
+              {{ equipmentInfo && equipmentInfo.equipmentCode }}
             </div>
           </div>
         </div>
@@ -116,9 +116,6 @@
 
 <script>
 export default {
-  data() {
-    return {};
-  },
   props: {
     userInfo: {
       type: Object,
@@ -128,13 +125,7 @@ export default {
       type: Object,
       default: ()=> {}
     }
-  },
-  methods: {
-    
-  },
-  mounted() {
-    
-  },
+  }
 };
 </script>
 

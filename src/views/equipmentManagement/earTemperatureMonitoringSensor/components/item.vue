@@ -21,7 +21,7 @@
           </div>
           <div class="list lx_flex">
             <div class="temperature">
-              {{ item.temperature }}°C
+              {{ item.temperature }}&nbsp;°C
             </div>
             <div class="temperature_icon">
               <img src="@/assets/icon_images/icon-wenduji.png">

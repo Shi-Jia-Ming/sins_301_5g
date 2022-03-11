@@ -143,4 +143,40 @@ export default {
   background-color: unset;
   border-radius: 10px;
 }
+
+@media screen and (max-width: 1800px) {
+  .box{
+    height: 350px;
+    padding: 0 20px;
+    background-size: 100% 100%;
+    .title{
+      height: 38px;
+      i{
+        font-size: 24px;
+      }
+      span{
+        font-size: 20px;
+        margin-left: 10px;
+      }
+    }
+    .content{
+      .header{
+        height: 39px;
+        div{
+          font-size: 16px;
+        }
+      }
+      .scrollContent{
+        .con{
+          .list{
+            height: 30px;
+            div{
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
 </style>

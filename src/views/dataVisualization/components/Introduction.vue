@@ -63,7 +63,7 @@ export default {
     width: 100%;
     height: 72px;
     background-image: url('~@/assets/icon_images/pic_shijian.png');
-    background-size: cover;
+    background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
     display: flex;
@@ -109,5 +109,31 @@ export default {
 .box ::v-deep .el-loading-mask{
   background-color: unset;
   border-radius: 10px;
+}
+
+@media screen and (max-width: 1800px) {
+  .box{
+    .timeBox{
+      height: 60px;
+      font-size: 24px;
+      background-size: 100% 100%;
+      padding: 0 30px;
+    }
+    .introduction{
+      margin-top: 5px;
+      height: 210px;
+      background-size: 100% 100%;
+      padding: 0 10px;
+      .title{
+        height: 26px;
+        font-size: 16px;
+      }
+      .content{
+        padding: 5px 0;
+        font-size: 13px;
+        line-height: 20px;
+      }
+    }
+  }
 }
 </style>

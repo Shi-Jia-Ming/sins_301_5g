@@ -121,6 +121,10 @@ export default {
     userId: {
       type: Number,
       default: null
+    },
+    equipmentId: {
+      type: Number,
+      default: null
     }
   },
   watch: {
@@ -162,7 +166,8 @@ export default {
         data: {
           userId: this.userId,
           startTime,
-          endTime
+          endTime,
+          equipmentId: this.equipmentId
         }
       }).then(res=>{
         const { bpm, breathe, time } = res

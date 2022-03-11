@@ -27,11 +27,11 @@
         <div class="list lx_flex">
           <div class="list_flex">
             <img src="@/assets/icon_images/icon-wenduji.png" />
-            <span>{{ item.temperature }}°C</span>
+            <span>{{ item.temperature }}&nbsp;°C</span>
           </div>
           <div class="list_flex">
             <img src="@/assets/icon_images/icon-xinlv.png" />
-            <span>{{ item.heartRate }}bmp</span>
+            <span>{{ item.heartRate }}&nbsp;bmp</span>
           </div>
         </div>
       </div>

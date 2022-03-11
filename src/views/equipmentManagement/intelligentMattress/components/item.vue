@@ -17,7 +17,7 @@
                 心率
               </span>
               <span class="status" :class=" item.heartRate <= 150 ? 'normal_status' : item.heartRate <= 180 ? 'warning_status' : 'error_status' ">
-                {{ item.heartRate }}dpm
+                {{ item.heartRate }}&nbsp;dpm
               </span>
             </div>
             <div class="list_flex">
@@ -25,7 +25,7 @@
                 在床状态
               </span>
               <span class="status" :class=" item.inBedStatus === 0 ? 'error_status' : 'normal_status' ">
-                {{ item.inBedStatus === null ? '无人在床' : item.inBedStatus === 1 ? '床垫受压' : '有人在床' }}
+                {{ !item.inBedStatus ? '无人在床' : item.inBedStatus === 1 ? '床垫受压' : '有人在床' }}
               </span>
             </div>
           </div>
@@ -43,7 +43,7 @@
                 抖动
               </span>
               <span class="status normal_status">
-                {{ item.shake }}
+                {{ !item.shake ? item.shake : 0 }}
               </span>
             </div>
           </div>
@@ -52,16 +52,16 @@
               <span class="text">
                 呼吸暂停
               </span>
-              <span class="status" :class=" item.status !== 0 ? item.stopBreathSign === 0 ? 'normal_status' : 'error_status' : 'normal_status' ">
-                {{ item.stopBreathSign }}
+              <span class="status" :class=" item.status !== 0 ? item.respiratoryRate < 100 ? 'normal_status' : 'error_status' : 'normal_status' ">
+                {{ item.respiratoryRate }}
               </span>
             </div>
             <div class="list_flex">
               <span class="text">
                 介入标志
               </span>
-              <span class="status" :class=" item.status !== 0 ? item.stopBreathSign === 0 ? 'normal_status' : 'error_status' : 'normal_status' ">
-                {{ item.stopBreathSignName }}
+              <span class="status" :class=" item.status !== 0 ? item.stopBreatheSign === 0 ? 'normal_status' : 'error_status' : 'normal_status' ">
+                {{ !item.stopBreatheSign ? '正常' : '异常' }}
               </span>
             </div>
           </div>

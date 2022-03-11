@@ -71,23 +71,24 @@ export default {
         }
       })
     },
-    getBasicData(userId){
+    getBasicData(userId, equipmentId){
       const timestamp = Date.parse(new Date())
       return request({
         url: 'mattress/findBreatheAndHR',
         method: 'get',
         params: {
           userId,
-          timestamp
+          timestamp,
+          equipmentId
         }
       })
     },
     allRequest(){
-      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId)]
+      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId, this.equipmentId)]
       this.loading()
       Promise.all(requestAll).then(res=>{
-        this.userInfo = res[0].userInfo
-        this.equipmentInfo = res[0].equipmentInfo
+        this.userInfo = res[0].data.userInfo
+        this.equipmentInfo = res[0].data.equipmentInfo
         this.echartsTime = res[1].time
         this.echartsBreathe = res[1].breathe
         this.echartsBpm = res[1].bpm

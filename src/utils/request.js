@@ -1,11 +1,9 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
-import store from '@/store'
-import { getToken } from '@/utils/auth'
 
 const service = axios.create({
-  baseURL: process.env.VUE_APP_BASE_API,
-  // baseURL: 'http://47.108.67.1/eqServer/',
+  // baseURL: process.env.VUE_APP_BASE_API,
+  baseURL: 'http://47.108.67.1/eqServer/',
   timeout: 100000
 })
 service.interceptors.request.use(

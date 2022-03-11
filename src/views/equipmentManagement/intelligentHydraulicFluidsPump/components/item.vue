@@ -12,25 +12,27 @@
       </div>
       <div class="bot">
         <div class="list lx_flex">
-          <div class="text">总量/已输液量（ML)</div>
-          <div class="number">{{ item.totalLiquid }}/{{ item.alreadyLiquid }}</div>
+          <div class="text">已输液量/总量（ML)</div>
+          <div class="number">{{ item.alreadyLiquid }}/{{ item.totalLiquid }}</div>
         </div>
         <div class="list lx_flex">
           <div class="text">速度（ML/H）</div>
           <div class="number">{{ item.speed }}</div>
         </div>
         <div class="list lx_flex">
-          <div class="text">剩余时间（H）</div>
+          <div class="text">剩余时间（min）</div>
           <div class="number">{{ item.residueTime }}</div>
         </div>
-        <div class="list lx_flex">
+        <div class="list lx_flex" v-if="item.status !== 1">
           <div class="earlyWarning" :class=" item.bubble ? 'text_normal' : 'text_error' ">
             {{ item.bubble ? '' : '气泡预警' }}
           </div>
           <div class="status" :class=" item.block ? 'text_normal' : 'text_error' ">{{ item.block ? '' : '阻塞' }}</div>
-          <div class="status" :class=" item.block ? 'text_normal' : 'text_error' ">
+          <div class="status" :class=" item.energy ? 'text_normal' : 'text_error' ">{{ item.energy ? '' : '电量预警' }}</div>
+          <div class="status" :class=" item.kvo ? 'text_normal' : 'text_error' ">{{ item.kvo ? '' : 'kvo' }}</div>
+          <!-- <div class="status" :class=" item.block ? 'text_normal' : 'text_error' ">
             {{ InfusionStatus(item) }}
-          </div>
+          </div> -->
         </div>
       </div>
     </div>

@@ -42,18 +42,19 @@ export default {
   methods: {
     // 轮循方法
     timerBasicData(){
-      this.getBasicData(this.userId).then(({data}) =>{
+      this.getBasicData(this.userId, this.equipmentId).then(({data}) =>{
         this.basicData = data
       })
     },
-    getBasicData(userId){
+    getBasicData(userId, equipmentId){
       const timestamp = Date.parse(new Date())
       return request({
         url: 'mattress/findBreatheAndHR',
         method: 'get',
         params: {
           userId,
-          timestamp
+          timestamp,
+          equipmentId
         }
       })
     },

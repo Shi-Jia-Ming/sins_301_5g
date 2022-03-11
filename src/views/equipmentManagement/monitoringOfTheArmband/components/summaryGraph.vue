@@ -73,7 +73,7 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name: '心率（bpm）',
+            name: '体温（°C）',
             axisLine: {
               show: true,
               lineStyle: {
@@ -83,7 +83,7 @@ export default {
           },
           {
             type: 'value',
-            name: '体温（°C）',
+            name: '心率（bpm）',
             axisLine: {
               show: true,
               lineStyle: {
@@ -101,7 +101,7 @@ export default {
             yAxisIndex: 0,
             smooth: true,
             itemStyle: {
-              color: '#0494ec'
+              color: '#f75a35'
             }
           },
           {
@@ -112,7 +112,7 @@ export default {
             yAxisIndex: 1,
             smooth: true,
             itemStyle: {
-              color: '#f75a35'
+              color: '#0494ec'
             }
           }
         ]

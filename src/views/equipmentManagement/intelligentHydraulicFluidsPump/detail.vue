@@ -69,25 +69,33 @@ export default {
         }
       })
     },
-    getBasicData(userId){
+    getBasicData(userId, equipmentId){
       const timestamp = Date.parse(new Date())
       return request({
         url: 'infusionPump/findDetails',
         method: 'get',
         params: {
           userId,
-          timestamp
+          timestamp,
+          equipmentId
         }
       })
     },
     allRequest(){
-      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId)]
+      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId, this.equipmentId)]
       this.loading()
       Promise.all(requestAll).then(res=>{
-        this.userInfo = res[0].data.userInfo
-        this.equipmentInfo = res[0].data.equipmentInfo
-        this.echartsData = res[1].data
-        this.basicData = res[2].data
+        // 判断是否为第一次请求
+        if( Object.keys(this.userInfo).length === 0 || Object.keys(this.equipmentInfo).length === 0 || Object.keys(this.echartsData).length === 0 || Object.keys(this.basicData).length === 0  ){
+          this.userInfo = res[0].data.userInfo
+          this.equipmentInfo = res[0].data.equipmentInfo
+          this.echartsData = res[1].data
+          this.basicData = res[2].data
+        }else{
+          if( res[2].data.status !== 0 ){
+            this.basicData = res[2].data
+          }
+        }
       }).finally(_=>{
         this.closeLoading()
       })
