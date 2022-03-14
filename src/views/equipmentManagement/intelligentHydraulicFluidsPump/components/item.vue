@@ -13,15 +13,15 @@
       <div class="bot">
         <div class="list lx_flex">
           <div class="text">已输液量/总量（ML)</div>
-          <div class="number">{{ item.alreadyLiquid }}/{{ item.totalLiquid }}</div>
+          <div class="number">{{ item.alreadyLiquid || 0 }}/{{ item.totalLiquid || 0 }}</div>
         </div>
         <div class="list lx_flex">
           <div class="text">速度（ML/H）</div>
-          <div class="number">{{ item.speed }}</div>
+          <div class="number">{{ item.speed || 0 }}</div>
         </div>
         <div class="list lx_flex">
           <div class="text">剩余时间（min）</div>
-          <div class="number">{{ item.residueTime }}</div>
+          <div class="number">{{ item.residueTime || 0 }}</div>
         </div>
         <div class="list lx_flex" style="justify-content: unset;flex-wrap: wrap;align-items: flex-start;">
           <!-- <div class="earlyWarning" :class=" item.bubble ? 'text_normal' : 'text_error' ">

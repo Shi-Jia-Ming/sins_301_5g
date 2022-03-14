@@ -126,6 +126,10 @@ export default {
     userId: {
       type: Number,
       default: null
+    },
+    equipmentId: {
+      type: Number,
+      default: null
     }
   },
   watch: {
@@ -169,7 +173,8 @@ export default {
         data: {
           userId: this.userId,
           startTime,
-          endTime
+          endTime,
+          equipmentId: this.equipmentId
         }
       }).then(res=>{
         const { countFirstT, countSecondT, countThirdT, countFourT, time } = res.data
@@ -178,7 +183,11 @@ export default {
         this.option.series[1].data = countSecondT
         this.option.series[2].data = countThirdT
         this.option.series[3].data = countFourT
-        this.exampleEcharts.setOption(this.option, true)
+        if( this.exampleEcharts ){
+          this.exampleEcharts.setOption(this.option, true)
+        }else{
+          this.initEcharts()
+        }
       }).finally(_=>{
         this.echartsLoading = false
       })

@@ -16,21 +16,21 @@
         <div class="lx_flex list">
           <div class="list_flex">
             <span class="text"> 一通道 </span>
-            <span class="status" :class="statusClass(item.status)"> {{item.firstChannelTemperature}}&nbsp;°C </span>
+            <span class="status" :class="statusClass(item.status)"> {{item.firstChannelTemperature || 0}}&nbsp;°C </span>
           </div>
           <div class="list_flex">
             <span class="text"> 二通道 </span>
-            <span class="status" :class="statusClass(item.status)"> {{item.secondChannelTemperature}}&nbsp;°C </span>
+            <span class="status" :class="statusClass(item.status)"> {{item.secondChannelTemperature || 0}}&nbsp;°C </span>
           </div>
         </div>
         <div class="lx_flex list">
           <div class="list_flex">
             <span class="text"> 三通道 </span>
-            <span class="status" :class="statusClass(item.status)"> {{item.thirdChannelTemperature}}&nbsp;°C </span>
+            <span class="status" :class="statusClass(item.status)"> {{item.thirdChannelTemperature || 0}}&nbsp;°C </span>
           </div>
           <div class="list_flex">
             <span class="text"> 四通道 </span>
-            <span class="status" :class="statusClass(item.status)"> {{item.fourthChannelTemperature}}&nbsp;°C </span>
+            <span class="status" :class="statusClass(item.status)"> {{item.fourthChannelTemperature || 0}}&nbsp;°C </span>
           </div>
         </div>
       </div>

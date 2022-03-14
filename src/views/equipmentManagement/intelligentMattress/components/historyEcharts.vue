@@ -121,6 +121,10 @@ export default {
     userId: {
       type: Number,
       default: null
+    },
+    equipmentId: {
+      type: Number,
+      default: null
     }
   },
   watch: {
@@ -162,14 +166,19 @@ export default {
         data: {
           userId: this.userId,
           startTime,
-          endTime
+          endTime,
+          equipmentId: this.equipmentId
         }
       }).then(res=>{
-        const { bpm, breathe, time } = res
+        const { bpm, breathe, time } = res.data
         this.option.xAxis.data = time
         this.option.series[0].data = breathe
         this.option.series[1].data = bpm
-        this.exampleEcharts.setOption(this.option, true)
+        if( this.exampleEcharts ){
+          this.exampleEcharts.setOption(this.option, true)
+        }else{
+          this.initEcharts()
+        }
       }).finally(_=>{
         this.echartsLoading = false
       })

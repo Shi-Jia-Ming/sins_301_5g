@@ -65,7 +65,7 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name: '心率（bpm）',
+            name: '体温（°C）',
             axisLine: {
               show: true,
               lineStyle: {
@@ -75,7 +75,7 @@ export default {
           },
           {
             type: 'value',
-            name: '体温（°C）',
+            name: '心率（bpm）',
             axisLine: {
               show: true,
               lineStyle: {
@@ -93,7 +93,7 @@ export default {
             yAxisIndex: 0,
             smooth: true,
             itemStyle: {
-              color: '#0494ec'
+              color: '#f75a35'
             }
           },
           {
@@ -104,7 +104,7 @@ export default {
             yAxisIndex: 1,
             smooth: true,
             itemStyle: {
-              color: '#f75a35'
+              color: '#0494ec'
             }
           }
         ]
@@ -154,7 +154,7 @@ export default {
     initEcharts() {
       const chartDom = this.$refs.echarts;
       this.exampleEcharts = echarts.init(chartDom)
-      this.exampleEcharts.setOption(this.option);
+      this.exampleEcharts.setOption(this.option)
     },
     handleDate(){
       if( !this.dateValue ) return false
@@ -170,11 +170,15 @@ export default {
           equipmentId: this.equipmentId
         }
       }).then(res=>{
-        const { bpm, breathe, time } = res
+        const { heartRate, temperature, time } = res.data
         this.option.xAxis.data = time
-        this.option.series[0].data = breathe
-        this.option.series[1].data = bpm
-        this.exampleEcharts.setOption(this.option, true)
+        this.option.series[0].data = temperature
+        this.option.series[1].data = heartRate
+        if( this.exampleEcharts ){
+          this.exampleEcharts.setOption(this.option, true)
+        }else{
+          this.initEcharts()
+        }
       }).finally(_=>{
         this.echartsLoading = false
       })

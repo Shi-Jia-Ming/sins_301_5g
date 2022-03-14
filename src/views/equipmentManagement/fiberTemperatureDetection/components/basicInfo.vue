@@ -17,7 +17,7 @@
           <div class="left">
             <div>一通道</div>
             <span>
-              {{ basicData.firstChannelTemperature }}
+              {{ basicData.firstChannelTemperature || 0 }}
             </span>°C
           </div>
           <div class="right">
@@ -36,7 +36,7 @@
           <div class="left">
             <div>二通道</div>
             <span>
-              {{ basicData.secondChannelTemperature }}  
+              {{ basicData.secondChannelTemperature || 0 }}  
             </span>°C
           </div>
           <div class="right">
@@ -55,7 +55,7 @@
           <div class="left">
             <div>三通道</div>
             <span>
-              {{ basicData.thirdChannelTemperature }}  
+              {{ basicData.thirdChannelTemperature || 0 }}  
             </span>°C
           </div>
           <div class="right">
@@ -74,7 +74,7 @@
           <div class="left">
             <div>四通道</div>
             <span>
-              {{ basicData.fourthChannelTemperature }}
+              {{ basicData.fourthChannelTemperature || 0 }}
             </span>°C
           </div>
           <div class="right">
@@ -128,6 +128,9 @@ export default {
             break;
           case 3:
             text = 'error'
+            break;
+          default:
+            text = 'disable'
             break;
         }
         return text

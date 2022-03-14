@@ -1,6 +1,6 @@
 <!-- 数据大屏 -->
 <template>
-  <dv-full-screen-container id="dataV">
+  <div id="dataV" :style="{width: width + 'px', height: height + 'px'}">
     <div class="header">
       <HeaderContent />
     </div>
@@ -20,7 +20,7 @@
         <Item :propData="ear" :itemLoading="itemLoading" title="耳挂式生命体征监测仪" />
       </div>
     </div>
-  </dv-full-screen-container>
+  </div>
 </template>
 
 <script>
@@ -55,7 +55,9 @@ export default {
       warnInfoLoading: false,
       listData: [],
       // 轮循
-      timer: null
+      timer: null,
+      width: 0,
+      height: 0
     }
   },
   methods: {
@@ -104,6 +106,13 @@ export default {
         this.warnInfoLoading = false
         this.listData = res[2].data
       })
+    },
+    // 获取屏幕分辨率
+    getResolution(){
+      const width = window.screen.width
+      const height = window.screen.height
+      this.width = width
+      this.height = height
     }
   },
   mounted(){
@@ -111,6 +120,9 @@ export default {
     this.timer = setInterval(_=>{
       this.allRequest()
     }, 3000)
+  },
+  created(){
+    this.getResolution()
   },
   beforeDestroy(){
     if( this.timer ){
@@ -123,6 +135,8 @@ export default {
 <style lang="scss" scoped>
 #dataV{
   background-image: radial-gradient(#243a9b, #10183e);
+  // width: 100vw;
+  // height: 100vh;
   display: flex;
   flex-flow: column;
   padding: 1.82291vw 2.60416vw 0.26041vw;

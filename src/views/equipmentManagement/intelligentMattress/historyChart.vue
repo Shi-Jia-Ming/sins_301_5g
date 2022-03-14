@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="historyEcharts">
-      <historyEcharts :echartsData="echartsData" :userId="userId" />
+      <historyEcharts :echartsData="echartsData" :userId="userId" :equipmentId="equipmentId" />
     </div>
   </div>
 </template>
