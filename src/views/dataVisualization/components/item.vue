@@ -93,37 +93,37 @@ export default {
 <style lang="scss" scoped>
 .item{
   width: 100%;
-  height: 310px;
+  height: 16.14583vw;
   background-image: url('~@/assets/icon_images/pic_Zbeijing.png');
   background-size: contain;
   background-position: center;
   background-repeat: no-repeat;
   overflow: hidden;
-  padding: 0 25px;
+  padding: 0 1.30208vw;
   .title{
-    height: 75px;
+    height: 3.90625vw;
     display: flex;
     align-items: center;
-    font-size: 24px;
+    font-size: 1.25vw;
     font-weight: bold;
     color: #6cd6f3;
-    padding-left: 10px;
+    padding-left: 0.52083vw;
     text-shadow: 0 0 3px #6cd6f3;
   }
   .total{
     display: flex;
-    margin-top: 28px;
+    margin-top: 1.45833vw;
     width: 65%;
     justify-content: space-between;
     div{
       color: #75effd;
-      width: 28px;
-      height: 40px;
+      width: 1.45833vw;
+      height: 2.08333vw;
       display: flex;
       justify-content: center;
       align-items: center;
       // text-align: center;
-      font-size: 30px;
+      font-size: 1.5625vw;
       font-weight: bold;
       background-image: url('~@/assets/icon_images/pic_SZbiankuang.png');
       background-size: cover;
@@ -132,37 +132,37 @@ export default {
     }
   }
   .normal{
-    margin-top: 28px;
+    margin-top: 1.45833vw;
     display: flex;
     align-items: center;
     i{
-      font-size: 30px;
+      font-size: 1.5625vw;
       font-weight: bold;
       color: #4cf4af;
     }
     span{
-      margin-left: 10px;
-      font-size: 30px;
+      margin-left: 0.52083vw;
+      font-size: 1.5625vw;
       color: #4cf4af;
       font-weight: bold;
       letter-spacing: 0.15em;
     }
   }
   .bot{
-    margin-top: 37px;
+    margin-top: 1.92708vw;
     display: flex;
     .warning{
       display: flex;
       align-items: center;
       flex: 1;
       i{
-        font-size: 30px;
+        font-size: 1.5625vw;
         font-weight: bold;
         color: #ff9d34;
       }
       span{
-        margin-left: 10px;
-        font-size: 30px;
+        margin-left: 0.52083vw;
+        font-size: 1.5625vw;
         color: #ff9d34;
         font-weight: bold;
         letter-spacing: 0.15em;
@@ -173,13 +173,13 @@ export default {
       align-items: center;
       flex: 1;
       i{
-        font-size: 30px;
+        font-size: 1.5625vw;
         font-weight: bold;
         color: #ff4f32;
       }
       span{
-        margin-left: 10px;
-        font-size: 30px;
+        margin-left: 0.52083vw;
+        font-size: 1.5625vw;
         color: #ff4f32;
         font-weight: bold;
         letter-spacing: 0.15em;
@@ -190,52 +190,5 @@ export default {
 .item ::v-deep .el-loading-mask{
   background-color: unset;
   border-radius: 10px;
-}
-@media screen and (max-width: 1800px) {
-  .item{
-    height: 238px;
-    padding: 0 10px;
-    background-size: 100% 100%;
-    .title{
-      height: 55px;
-      font-size: 20px;
-    }
-    .total{
-      margin-top: 15px;
-      margin-left: 10px;
-      width: 60%;
-      div{
-        width: 20px;
-        height: 30px;
-        background-size: contain;
-        font-size: 20px;
-      }
-    }
-    .normal{
-      margin-top: 27px;
-      margin-left: 10px;
-      i{
-        font-size: 24px;
-      }
-      span{
-        font-size: 24px;
-        margin-left: 7px;
-      }
-    }
-    .bot{
-      margin-top: 30px;
-      margin-left: 10px;
-      .warning, .error{
-        i{
-          font-size: 24px;
-        }
-        span{
-          font-size: 24px;
-          margin-left: 7px;
-        }
-      }
-      
-    }
-  }
 }
 </style>

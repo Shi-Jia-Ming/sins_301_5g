@@ -37,23 +37,23 @@
                 剩余时间
               </div>
               <div class="module_val">
-                <!-- <countTo :startVal='0' :endVal='72' :duration='3000' />min -->
                 {{ basicData.residueTime }}
               </div>
             </div>
           </div>
         </div>
-        <div class="rightCon">
-          {{ basicData.status === 0 ? '无人在床' : basicData.status === 1 ? '无异常' : '异常' }}
+        <div class="rightCon" v-if="basicData.warnInfo">
+          <div class="tips">
+            <div v-for="item in basicData.warnInfo" :key="item">
+              {{ warningText(item) }}
+            </div>
+          </div>
         </div>
       </div>
       <div class="operate">
         <div class="status">
           {{ InfusionStatus(basicData) }}
         </div>
-        <!-- <div class="operateBtn">
-          暂停
-        </div> -->
       </div>
     </div>
   </div>
@@ -100,6 +100,50 @@ export default {
         }
         return text
       }
+    },
+    warningText(){
+      return (item) => {
+        let text = ''
+        switch(item){
+          case 'QP':
+            text = '气泡'
+            break;
+          case 'JS':
+            text = '结束'
+            break;
+          case 'WL':
+            text = '网络'
+            break;
+          case 'BB':
+            text = '背板'
+            break;
+          case 'ZS':
+            text = '截取阻塞信息'
+            break;
+          case 'DLJD':
+            text = '电池电量极低'
+            break;
+          case 'DLD':
+            text = '电池电量低'
+            break;
+          case 'YJ':
+            text = '预警'
+            break;
+          case 'TZ':
+            text = '停止'
+            break;
+          case 'KVO':
+            text = 'kvo报警'
+            break;
+          case 'CC':
+            text = '超出范围'
+            break;
+          default:
+            text = ''
+            break;
+        }
+        return text
+      }
     }
   },
   props: {
@@ -135,7 +179,7 @@ export default {
   margin-top: 15px;
   .item{
     height: 110px;
-    width: 650px;
+    width: 45.3125vw;
     border-radius: 10px;
     padding: 10px;
     display: flex;
@@ -181,7 +225,7 @@ export default {
       font-size: 16px;
       font-weight: bold;
       position: relative;
-      width: 100px;
+      width: 45%;
       &::after{
         content: "";
         width: 2px;
@@ -193,6 +237,19 @@ export default {
       }
     }
   }
+  .tips{
+    display: flex;
+    width: 100%;
+    padding: 10px 20px;
+    height: 100%;
+    flex-wrap: wrap;
+    div{
+      width: 30%;
+      font-size: 13px;
+      margin: 0 1.5%;
+    }
+  }
+
   .operate{
     display: flex;
     div{
@@ -214,6 +271,16 @@ export default {
     .operateBtn{
       background-color: #2ed42a;
       border: 1px solid #2ed42a;
+    }
+  }
+
+  .disable{
+    background-color: #f1fcff;
+    color: #00a399;
+    .rightCon{
+      &::after{
+        background-color: #00a399;
+      }
     }
   }
 

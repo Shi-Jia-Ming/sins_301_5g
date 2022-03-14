@@ -17,13 +17,6 @@ const port = process.env.port || process.env.npm_config_port || 9527 // dev port
 
 // 所有配置项的解释都可以在 https://cli.vuejs.org/config/ 中找到
 module.exports = {
-  /**
-    * 如果您计划将站点部署在子路径下，则需要设置 publicPath，
-    * 例如 GitHub 页面。 如果您打算将站点部署到 https://foo.github.io/bar/，
-    * 那么 publicPath 应该设置为“/bar/”。
-    * 在大多数情况下，请使用 '/' !!!
-    * 详情：https://cli.vuejs.org/config/#publicpath
-    */
   publicPath: '/',
   outputDir: 'dist',
   assetsDir: 'static',

@@ -125,14 +125,15 @@ export default {
   background-image: radial-gradient(#243a9b, #10183e);
   display: flex;
   flex-flow: column;
-  padding: 35px 50px 5px;
+  padding: 1.82291vw 2.60416vw 0.26041vw;
+  transform: scale(1) !important;
   .header{
-    height: 76px;
+    height: 3.95833vw;
     width: 100%;
   }
   .content{
     flex: 1;
-    margin-top: 10px;
+    margin-top: 0.52083vw;
     display: flex;
     justify-content: space-between;
     .leftCon,.rightCon{
@@ -146,15 +147,6 @@ export default {
       display: flex;
       justify-content: space-between;
       flex-flow: column;
-    }
-  }
-}
-
-@media screen and (max-width: 1800px) {
-  #dataV{
-    padding: 15px 30px 5px;
-    .header{
-      height: 50px;
     }
   }
 }

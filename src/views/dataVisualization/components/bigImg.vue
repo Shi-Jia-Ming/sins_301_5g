@@ -13,12 +13,12 @@ export default {
 <style lang="scss" scoped>
 .box{
   width: 100%;
-  height: 525px;
+  height: 27.34375vw;
   background-image: url('~@/assets/icon_images/pic_Dbeijing.png');
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  padding: 13px 34px 31px 32px;
+  padding: 0.67708vw 1.77083vw 1.61458vw 1.66666vw;
   img{
     width: 100%;
     border-radius: 10px;
@@ -27,14 +27,6 @@ export default {
     mask-repeat: no-repeat;
     mask-position: center;
     mask-size: contain;
-  }
-}
-
-@media screen and (max-width: 1800px) {
-  .box{
-    height: 420px;
-    padding: 11px 26px 27px 26px;
-    background-size: 100% 100%;
   }
 }
 </style>

@@ -65,12 +65,12 @@ export default {
 <style lang="scss" scoped>
 .box {
   width: 100%;
-  height: 410px;
+  height: 21.35416vw;
   background-image: url("~@/assets/icon_images/pic_XXYJbeijing.png");
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  padding: 0 30px;
+  padding: 0 1.5625vw;
   display: flex;
   justify-content: space-between;
   flex-flow: column;
@@ -78,17 +78,17 @@ export default {
   .title {
     display: flex;
     align-items: center;
-    height: 45px;
-    padding: 0 10px;
+    height: 2.34375vw;
+    padding: 0 0.52083vw;
     i {
-      font-size: 30px;
+      font-size: 1.5625vw;
       font-weight: bold;
       color: #29d4ff;
     }
     span {
       color: #29d4ff;
-      font-size: 24px;
-      margin-left: 15px;
+      font-size: 1.25vw;
+      margin-left: 0.78125vw;
       font-weight: bold;
     }
   }
@@ -102,34 +102,34 @@ export default {
     .header {
       display: flex;
       align-items: center;
-      height: 46px;
+      height: 2.39583vw;
       div {
         flex: 1;
         text-align: center;
-        margin: 0 10px;
+        margin: 0 0.52083vw;
         color: #29d4ff;
-        font-size: 20px;
+        font-size: 1.04166vw;
         font-weight: bold;
       }
     }
     .scrollContent{
       flex: 1;
       overflow: hidden;
-      padding: 10px;
+      padding: 0.52083vw;
       .con{
         width: 100%;
         height: 100%;
         .list{
           display: flex;
-          height: 35px;
+          height: 1.82291vw;
           align-items: center;
           justify-content: space-between;
-          font-size: 18px;
+          font-size: 0.9375vw;
           color: #29d4ff;
           div{
             flex: 1;
             text-align: center;
-            margin: 0 10px;
+            margin: 0 0.52083vw;
           }
           .warning{
             color: #ff9d34;
@@ -142,41 +142,5 @@ export default {
 .box ::v-deep .el-loading-mask{
   background-color: unset;
   border-radius: 10px;
-}
-
-@media screen and (max-width: 1800px) {
-  .box{
-    height: 350px;
-    padding: 0 20px;
-    background-size: 100% 100%;
-    .title{
-      height: 38px;
-      i{
-        font-size: 24px;
-      }
-      span{
-        font-size: 20px;
-        margin-left: 10px;
-      }
-    }
-    .content{
-      .header{
-        height: 39px;
-        div{
-          font-size: 16px;
-        }
-      }
-      .scrollContent{
-        .con{
-          .list{
-            height: 30px;
-            div{
-              font-size: 14px;
-            }
-          }
-        }
-      }
-    }
-  }
 }
 </style>

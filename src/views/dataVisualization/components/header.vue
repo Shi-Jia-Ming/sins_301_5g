@@ -22,19 +22,11 @@ export default {
   justify-content: center;
   align-items: flex-start;
   .text{
-    font-size: 48px;
+    font-size: 2.5vw;
     background-image:-webkit-linear-gradient(right,#54f9ff,#57aaff);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
     font-weight: bold;
-  }
-}
-
-@media screen and (max-width: 1800px) {
-  .header{
-    .text{
-      font-size: 30px;
-    }
   }
 }
 </style>

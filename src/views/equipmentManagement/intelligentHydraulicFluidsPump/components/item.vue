@@ -23,16 +23,19 @@
           <div class="text">剩余时间（min）</div>
           <div class="number">{{ item.residueTime }}</div>
         </div>
-        <div class="list lx_flex" v-if="item.status !== 1">
-          <div class="earlyWarning" :class=" item.bubble ? 'text_normal' : 'text_error' ">
+        <div class="list lx_flex" style="justify-content: unset;flex-wrap: wrap;align-items: flex-start;">
+          <!-- <div class="earlyWarning" :class=" item.bubble ? 'text_normal' : 'text_error' ">
             {{ item.bubble ? '' : '气泡预警' }}
           </div>
           <div class="status" :class=" item.block ? 'text_normal' : 'text_error' ">{{ item.block ? '' : '阻塞' }}</div>
           <div class="status" :class=" item.energy ? 'text_normal' : 'text_error' ">{{ item.energy ? '' : '电量预警' }}</div>
-          <div class="status" :class=" item.kvo ? 'text_normal' : 'text_error' ">{{ item.kvo ? '' : 'kvo' }}</div>
+          <div class="status" :class=" item.kvo ? 'text_normal' : 'text_error' ">{{ item.kvo ? '' : 'kvo' }}</div> -->
           <!-- <div class="status" :class=" item.block ? 'text_normal' : 'text_error' ">
             {{ InfusionStatus(item) }}
           </div> -->
+          <div v-for="items in item.warnInfo" :key="items" class="text_error status">
+            {{ warningText(items) }}
+          </div>
         </div>
       </div>
     </div>
@@ -64,6 +67,50 @@ export default {
           }
         }else{
           text = '空闲'
+        }
+        return text
+      }
+    },
+    warningText(){
+      return (item) => {
+        let text = ''
+        switch(item){
+          case 'QP':
+            text = '气泡'
+            break;
+          case 'JS':
+            text = '结束'
+            break;
+          case 'WL':
+            text = '网络'
+            break;
+          case 'BB':
+            text = '背板'
+            break;
+          case 'ZS':
+            text = '截取阻塞信息'
+            break;
+          case 'DLJD':
+            text = '电池电量极低'
+            break;
+          case 'DLD':
+            text = '电池电量低'
+            break;
+          case 'YJ':
+            text = '预警'
+            break;
+          case 'TZ':
+            text = '停止'
+            break;
+          case 'KVO':
+            text = 'kvo报警'
+            break;
+          case 'CC':
+            text = '超出范围'
+            break;
+          default:
+            text = ''
+            break;
         }
         return text
       }
@@ -205,6 +252,10 @@ export default {
           font-size: 14px;
           font-weight: bold;
           color: #7100fa;
+          line-height: 20px;
+          height: 20px;
+          width: 32%;
+          margin: 0 0.6%;
         }
         .text_error {
           color: #ff214b;

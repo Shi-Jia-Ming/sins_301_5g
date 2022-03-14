@@ -61,7 +61,7 @@ export default {
 .box{
   .timeBox{
     width: 100%;
-    height: 72px;
+    height: 3.75vw;
     background-image: url('~@/assets/icon_images/pic_shijian.png');
     background-size: contain;
     background-position: center;
@@ -69,14 +69,14 @@ export default {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 50px;
-    font-size: 30px;
+    padding: 0 2.60416vw;
+    font-size: 1.5625vw;
     font-weight: bold;
     color: #29d4ff;
   }
   .introduction{
     width: 100%;
-    height: 245px;
+    height: 12.76041vw;
     background-image: url('~@/assets/icon_images/pic_SYSbeijing.png');
     background-position: center;
     background-repeat: no-repeat;
@@ -84,22 +84,22 @@ export default {
     display: flex;
     flex-flow: column;
     box-sizing: border-box;
-    padding: 0 20px;
+    padding: 0 1.04166vw;
     .title{
-      height: 30px;
+      height: 1.5625vw;
       display: flex;
       align-items: center;
-      font-size: 18px;
+      font-size: 0.9375vw;
       font-weight: bold;
       color: #29d4ff;
     }
     .content{
       flex: 1;
-      padding: 10px 0;
+      padding: 0.52083vw 0;
       overflow-y: auto;
-      font-size: 16px;
+      font-size: 0.83333vw;
       color: #29d4ff;
-      line-height: 25px;
+      line-height: 1.30208vw;
       text-indent: 2em;
       font-weight: bold;
       letter-spacing: 0.1em;
@@ -109,31 +109,5 @@ export default {
 .box ::v-deep .el-loading-mask{
   background-color: unset;
   border-radius: 10px;
-}
-
-@media screen and (max-width: 1800px) {
-  .box{
-    .timeBox{
-      height: 60px;
-      font-size: 24px;
-      background-size: 100% 100%;
-      padding: 0 30px;
-    }
-    .introduction{
-      margin-top: 5px;
-      height: 210px;
-      background-size: 100% 100%;
-      padding: 0 10px;
-      .title{
-        height: 26px;
-        font-size: 16px;
-      }
-      .content{
-        padding: 5px 0;
-        font-size: 13px;
-        line-height: 20px;
-      }
-    }
-  }
 }
 </style>
