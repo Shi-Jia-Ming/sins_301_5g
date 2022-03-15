@@ -6,19 +6,17 @@
       <span>历史数据统计图</span>
     </div>
     <div class="actionBar">
-      <div class="type">
+      <!-- <div class="type">
         <div v-for="(item, index) in dateTypeArr" :key="item" :class=" index === current ? 'active' : '' " @click="toggleType(index)">
           {{ item }}
         </div>
-      </div>
+      </div> -->
       <div class="date">
         <el-date-picker
           v-model="dateValue"
           :type="dateType"
-          range-separator="至"
-          start-placeholder="开始时间"
-          end-placeholder="结束时间"
           value-format="yyyy-MM-dd"
+          placeholder="选择日期"
           size="small"
           @change="handleDate"
         >
@@ -40,7 +38,7 @@ export default {
     return {
       dateTypeArr: ['日', '月'],
       current: 0,
-      dateType: 'daterange',
+      dateType: 'date',
       dateValue: '',
       // echarts配置项
       option: {
@@ -65,7 +63,13 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name: '输液量（ML）'
+            name: '输液量（ML）',
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: '#ffa759'
+              }
+            }
           }
         ],
         series: [
@@ -133,7 +137,7 @@ export default {
     },
     handleDate(){
       if( !this.dateValue ) return false
-      const [startTime, endTime] = this.dateValue
+      const startTime = this.dateValue, endTime = this.dateValue
       this.echartsLoading = true
       request({
         url: 'infusionPump/findLineChart',

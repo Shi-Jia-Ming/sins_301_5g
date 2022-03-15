@@ -23,7 +23,7 @@ export default {
     getItemData(){
       // 获取时间戳
       const timestamp = Date.parse(new Date())
-      this.loading()
+      this.loading_s()
       request({
         url: 'ear/findBaseInfo',
         method: 'get',

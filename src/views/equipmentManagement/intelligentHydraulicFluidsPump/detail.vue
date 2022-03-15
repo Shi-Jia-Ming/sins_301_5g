@@ -83,7 +83,7 @@ export default {
     },
     allRequest(){
       const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId, this.equipmentId)]
-      this.loading()
+      this.loading_s()
       Promise.all(requestAll).then(res=>{
         // 判断是否为第一次请求
         if( Object.keys(this.userInfo).length === 0 || Object.keys(this.equipmentInfo).length === 0 || Object.keys(this.echartsData).length === 0 || Object.keys(this.basicData).length === 0  ){

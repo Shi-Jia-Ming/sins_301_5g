@@ -1,12 +1,12 @@
 <template>
   <div class="itemBox">
-    <div v-for="item in dataList" :key="item.userId" class="item" @click="gotoDetail(item)">
+    <div v-for="item in dataList" :key="item.equipmentId" class="item" @click="gotoDetail(item)">
       <div class="top" :class="statusClass(item.status)">
         <div class="avatar">
           <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" />
         </div>
         <div class="info">
-          <div class="name">{{ item.status ? item.userName : '无人在床' }}</div>
+          <div class="name">{{ item.status ? item.userName : '设备离线' }}</div>
           <div class="number">{{ item.status ? item.equipmentCode : '' }}</div>
         </div>
       </div>
@@ -27,11 +27,11 @@
         <div class="list lx_flex">
           <div class="list_flex">
             <img src="@/assets/icon_images/icon-wenduji.png" />
-            <span>{{ item.temperature }}&nbsp;°C</span>
+            <span>{{ item.temperature || 0 }}&nbsp;°C</span>
           </div>
           <div class="list_flex">
             <img src="@/assets/icon_images/icon-xinlv.png" />
-            <span>{{ item.heartRate }}&nbsp;bmp</span>
+            <span>{{ item.heartRate || 0 }}&nbsp;bmp</span>
           </div>
         </div>
       </div>

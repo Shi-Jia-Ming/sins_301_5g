@@ -65,7 +65,13 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name: '体温（°C）'
+            name: '体温（°C）',
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: '#0e92ee'
+              }
+            }
           }
         ],
         series: [

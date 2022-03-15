@@ -15,7 +15,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span><countTo :startVal='0' :endVal='basicData.heartRate' :duration='3000' /></span>bpm
+            <span><countTo :startVal='0' :endVal='basicData.heartRate || 0' :duration='3000' /></span>bpm
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-xinlv.png" />
@@ -31,7 +31,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span><countTo :startVal='0' :endVal='basicData.breathe' :duration='3000' /></span>次
+            <span><countTo :startVal='0' :endVal='basicData.breathe || 0' :duration='3000' /></span>次
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-huxi.png" />

@@ -65,7 +65,13 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name: '输液量（ML）'
+            name: '输液量（ML）',
+            axisLine: {
+              show: true,
+              lineStyle: {
+                color: '#ffa759'
+              }
+            }
           }
         ],
         series: [

@@ -1,6 +1,6 @@
 <template>
     <div class="itemBox">
-      <div v-for="item in dataList" :key="item.userId" class="item" @click="gotoDetail(item)">
+      <div v-for="item in dataList" :key="item.equipmentId" class="item" @click="gotoDetail(item)">
         <div class="top" :class="statusClass(item.status)"> 
           <div class="avatar">
             <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500">

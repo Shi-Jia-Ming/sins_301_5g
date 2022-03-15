@@ -75,7 +75,7 @@ export default {
     },
     allRequest(){
       const requestAll = [this.getBasicData(this.userId), this.getEchartsData(this.userId)]
-      this.loading()
+      this.loading_s()
       Promise.all(requestAll).then(res=>{
         this.basicData = res[0].data
         this.echartsData = res[1]

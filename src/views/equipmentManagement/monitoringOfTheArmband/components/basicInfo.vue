@@ -15,7 +15,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span><countTo :startVal='0' :endVal='basicData.heartRate' :duration='3000' /></span>bpm
+            <span><countTo :startVal='0' :endVal='basicData.heartRate || 0' :duration='3000' /></span>bpm
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-xinlv.png" />
@@ -31,7 +31,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span>{{ basicData.temperature }}</span>°C
+            <span>{{ basicData.temperature || 0 }}</span>°C
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-wenduji.png" />
@@ -44,7 +44,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span><countTo :startVal='0' :endVal='basicData.stepNumber' :duration='3000' /></span>步
+            <span><countTo :startVal='0' :endVal='basicData.stepNumber || 0' :duration='3000' /></span>步
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-bushu.png" />
