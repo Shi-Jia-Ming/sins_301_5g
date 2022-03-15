@@ -1,6 +1,7 @@
 <!-- 数据大屏 -->
 <template>
-  <div id="dataV" :style="{width: width + 'px', height: height + 'px'}">
+  <!-- <div id="dataV" :style="{width: width + 'px', height: height + 'px'}"> -->
+  <dv-full-screen-container id="dataV">
     <div class="header">
       <HeaderContent />
     </div>
@@ -20,7 +21,8 @@
         <Item :propData="ear" :itemLoading="itemLoading" title="耳挂式生命体征监测仪" />
       </div>
     </div>
-  </div>
+  </dv-full-screen-container>
+  <!-- </div> -->
 </template>
 
 <script>
@@ -140,7 +142,7 @@ export default {
   display: flex;
   flex-flow: column;
   padding: 1.82291vw 2.60416vw 0.26041vw;
-  transform: scale(1) !important;
+  // transform: scale(1) !important;
   .header{
     height: 3.95833vw;
     width: 100%;

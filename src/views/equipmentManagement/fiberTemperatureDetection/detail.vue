@@ -54,7 +54,7 @@ export default {
         }
       })
     },
-    getEchartsData(userId){
+    getEchartsData(userId, equipmentId){
       const myDate = new Date()
       let timer = myDate.toISOString().substring(myDate.toISOString().indexOf('T'), -1)
       const timestamp = Date.parse(myDate)
@@ -65,7 +65,8 @@ export default {
           userId,
           startTime: timer,
           endTime: timer,
-          timestamp
+          timestamp,
+          equipmentId
         }
       })
     },
@@ -82,13 +83,13 @@ export default {
       })
     },
     allRequest(){
-      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId), this.getBasicData(this.userId, this.equipmentId)]
+      const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId, this.equipmentId), this.getBasicData(this.userId, this.equipmentId)]
       this.loading_s()
       Promise.all(requestAll).then(res=>{
-        this.userInfo = res[0].data.userInfo
-        this.equipmentInfo = res[0].data.equipmentInfo
-        this.echartsData = res[1].data
-        this.basicData = res[2].data
+        this.userInfo = res[0]?.data.userInfo
+        this.equipmentInfo = res[0]?.data.equipmentInfo
+        this.echartsData = res[1]?.data
+        this.basicData = res[2]?.data
       }).finally(_=>{
         this.closeLoading()
       })

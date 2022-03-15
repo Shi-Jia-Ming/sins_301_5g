@@ -6,7 +6,7 @@
             <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500">
           </div>
           <div class="info">
-            <div class="name">{{ item.status ? item.userName : '无人在床' }}</div>
+            <div class="name">{{ item.status ? item.userName : '设备离线' }}</div>
             <div class="number">{{ item.status ? item.equipmentCode : '' }}</div>
           </div>
         </div>
@@ -17,7 +17,7 @@
                 心率
               </span>
               <span class="status" :class=" item.heartRate <= 150 ? 'normal_status' : item.heartRate <= 180 ? 'warning_status' : 'error_status' ">
-                {{ item.heartRate }}&nbsp;dpm
+                {{ item.heartRate || 0 }}&nbsp;dpm
               </span>
             </div>
             <div class="list_flex">
@@ -35,7 +35,7 @@
                 呼吸
               </span>
               <span class="status" :class=" item.status ? item.breathe > 30 && item.breathe <= 40  ? 'normal_status' : item.breathe > 40 && item.breathe <= 42 ? 'warning_status' : 'error_status' : 'normal_status' ">
-                {{ item.breathe }}
+                {{ item.breathe || 0 }}
               </span>
             </div>
             <div class="list_flex">
@@ -43,7 +43,7 @@
                 抖动
               </span>
               <span class="status normal_status">
-                {{ !item.shake ? item.shake : 0 }}
+                {{ item.shake ? item.shake : 0 }}
               </span>
             </div>
           </div>
@@ -53,7 +53,7 @@
                 呼吸暂停
               </span>
               <span class="status" :class=" item.status !== 0 ? item.respiratoryRate < 100 ? 'normal_status' : 'error_status' : 'normal_status' ">
-                {{ item.respiratoryRate }}
+                {{ item.respiratoryRate || 0 }}
               </span>
             </div>
             <div class="list_flex">
@@ -61,7 +61,7 @@
                 介入标志
               </span>
               <span class="status" :class=" item.status !== 0 ? item.stopBreatheSign === 0 ? 'normal_status' : 'error_status' : 'normal_status' ">
-                {{ !item.stopBreatheSign ? '正常' : '异常' }}
+                {{ item.stopBreatheSign ? '正常' : '异常' }}
               </span>
             </div>
           </div>

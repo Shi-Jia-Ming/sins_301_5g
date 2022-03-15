@@ -44,8 +44,8 @@ export default {
   methods: {
     // 轮循方法
     timerBasicData(){
-      this.getBasicData(this.userId, this.equipmentId).then(({data}) =>{
-        this.basicData = data
+      this.getBasicData(this.userId, this.equipmentId).then(res =>{
+        this.basicData = res?.data
       })
     },
     getBasicData(userId, equipmentId){
@@ -60,7 +60,7 @@ export default {
         }
       })
     },
-    getEchartsData(userId){
+    getEchartsData(userId, equipmentId){
       const myDate = new Date()
       let timer = myDate.toISOString().substring(myDate.toISOString().indexOf('T'), -1)
       const timestamp = Date.parse(myDate)
@@ -71,7 +71,8 @@ export default {
           userId,
           startTime: timer,
           endTime: timer,
-          timestamp
+          timestamp,
+          equipmentId
         }
       })
     },
@@ -86,12 +87,12 @@ export default {
       })
     },
     allRequest(){
-      const requestAll = [this.getBasicData(this.userId), this.getEchartsData(this.userId), this.getUserInfo(this.userId, this.equipmentId)]
+      const requestAll = [this.getBasicData(this.userId, this.equipmentId), this.getEchartsData(this.userId, this.equipmentId), this.getUserInfo(this.userId, this.equipmentId)]
       this.loading_s()
       Promise.all(requestAll).then(res=>{
-        this.basicData = res[0].data
-        this.echartsData = res[1].data
-        this.userInfo = res[2].data.userInfo
+        this.basicData = res[0]?.data
+        this.echartsData = res[1]?.data
+        this.userInfo = res[2]?.data.userInfo
       }).finally(_=>{
         this.closeLoading()
       })
