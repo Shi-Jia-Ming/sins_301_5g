@@ -10,7 +10,7 @@
         <router-link :to="{
           path: '/equipment/armbandHistoryChart',
           name: 'ArmbandHistoryChart',
-          params: {
+          query: {
             userId: this.userId,
             equipmentId: this.equipmentId
           }
@@ -77,7 +77,7 @@ export default {
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#f75a35'
+                color: '#a600ff'
               }
             }
           },
@@ -101,7 +101,7 @@ export default {
             yAxisIndex: 0,
             smooth: true,
             itemStyle: {
-              color: '#f75a35'
+              color: '#a600ff'
             }
           },
           {

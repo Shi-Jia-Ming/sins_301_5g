@@ -10,7 +10,7 @@
         <router-link :to="{
           path: '/equipment/earTemperatureHistoryChart',
           name: 'EarTemperatureHistoryChart',
-          params: {
+          query: {
             userId: this.userId,
             equipmentId: this.equipmentId
           }

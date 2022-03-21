@@ -81,7 +81,7 @@ export default {
         this.$router.push({
           path: '/equipment/armbandDetail',
           name: 'ArmbandDetail',
-          params: {
+          query: {
             userId,
             equipmentId
           }

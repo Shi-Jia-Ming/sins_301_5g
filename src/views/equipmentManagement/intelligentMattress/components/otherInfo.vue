@@ -8,9 +8,6 @@
           <i class="iconfont icongerenh"></i>
           <span>个人信息</span>
         </div>
-        <div class="icon">
-          <i class="iconfont iconbianji1"></i>
-        </div>
       </div>
       <div class="content">
         <div class="list">
@@ -59,9 +56,6 @@
               {{ equipmentInfo && equipmentInfo.equipmentCode }}
             </div>
           </div>
-        </div>
-        <div class="rightCon">
-          <img src="https://img0.baidu.com/it/u=3712997108,442011921&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500">
         </div>
       </div>
     </div>

@@ -77,7 +77,7 @@ export default {
             symbol: 'circle',
             smooth: true,
             itemStyle: {
-              color: '#ffa858'
+              color: '#00feff'
             }
           },
           {

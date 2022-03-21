@@ -96,8 +96,8 @@ export default {
     }
   },
   mounted(){
-    this.userId = this.$route.params.userId
-    this.equipmentId = this.$route.params.equipmentId
+    this.userId = Number(this.$route.query.userId)
+    this.equipmentId = Number(this.$route.query.equipmentId)
     // 判断是否带参数进入页面
     if( !this.userId || !this.equipmentId ){
       this.$message({

@@ -15,7 +15,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span>{{ basicData.temperature }}</span>°C
+            <span>{{ basicData.temperature || 0 }}</span>°C
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-wenduji.png" />
@@ -48,6 +48,9 @@ export default {
             break;
           case 3:
             text = 'error'
+            break;
+          default:
+            text = 'disable'
             break;
         }
         return text
@@ -131,9 +134,18 @@ export default {
       }
     }
   }
+  .disable{
+    background-color: #bfbfbf;
+    color: #333333;
+  }
+
   .normal{
     background-color: #f1fcff;
     color: #00a399;
+  }
+  .warning{
+    background-color: #fff8f3;
+    color: #ffb546;
   }
   .error{
     background-color: #ffeeee;

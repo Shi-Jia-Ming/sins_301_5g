@@ -58,7 +58,7 @@
             </div>
             <div class="list_flex">
               <span class="text">
-                介入标志
+                设备状态
               </span>
               <span class="status" :class=" item.status !== 0 ? item.stopBreatheSign === 0 ? 'normal_status' : 'error_status' : 'normal_status' ">
                 {{ item.stopBreatheSign ? '正常' : '异常' }}
@@ -93,7 +93,7 @@ export default {
         this.$router.push({
           path: '/equipment/mattressDetail',
           name: 'MattressDetail',
-          params: {
+          query: {
             userId,
             equipmentId
           }

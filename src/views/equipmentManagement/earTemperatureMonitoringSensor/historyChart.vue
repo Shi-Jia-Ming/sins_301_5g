@@ -99,9 +99,9 @@ export default {
     }
   },
   mounted(){
-    if( this.$route.params !== {} ){
-      this.userId = this.$route.params.userId
-      this.equipmentId = this.$route.params.equipmentId
+    if( this.$route.query !== {} ){
+      this.userId = Number(this.$route.query.userId)
+      this.equipmentId = Number(this.$route.query.equipmentId)
       this.allRequest()
       this.timer = setInterval(_ => {
         this.timerBasicData()

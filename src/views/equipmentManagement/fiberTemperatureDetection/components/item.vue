@@ -60,7 +60,7 @@ export default {
         this.$router.push({
           path: '/equipment/fiberDetail',
           name: 'FiberDetail',
-          params: {
+          query: {
             userId,
             equipmentId
           }

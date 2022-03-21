@@ -123,7 +123,7 @@ export default {
         this.$router.push({
           path: '/equipment/infusionPumpDetail',
           name: 'InfusionPumpDetail',
-          params: {
+          query: {
             userId,
             equipmentId
           }

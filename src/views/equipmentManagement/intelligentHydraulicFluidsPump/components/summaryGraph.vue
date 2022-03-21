@@ -10,7 +10,7 @@
         <router-link :to="{
           path: '/equipment/infusionPumpHistoryChart',
           name: 'InfusionPumpHistoryChart',
-          params: {
+          query: {
             userId: this.userId,
             equipmentId: this.equipmentId
           }

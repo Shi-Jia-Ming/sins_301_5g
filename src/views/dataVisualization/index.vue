@@ -1,7 +1,7 @@
 <!-- 数据大屏 -->
 <template>
-  <!-- <div id="dataV" :style="{width: width + 'px', height: height + 'px'}"> -->
-  <dv-full-screen-container id="dataV">
+  <div id="dataV" :style="{width: width + 'px', height: height + 'px'}">
+  <!-- <dv-full-screen-container id="dataV"> -->
     <div class="header">
       <HeaderContent />
     </div>
@@ -21,8 +21,8 @@
         <Item :propData="ear" :itemLoading="itemLoading" title="耳挂式生命体征监测仪" />
       </div>
     </div>
-  </dv-full-screen-container>
-  <!-- </div> -->
+  <!-- </dv-full-screen-container> -->
+  </div>
 </template>
 
 <script>
@@ -111,8 +111,10 @@ export default {
     },
     // 获取屏幕分辨率
     getResolution(){
-      const width = window.screen.width
+      // const width = window.screen.width
+      const width = document.body.offsetWidth
       const height = window.screen.height
+      // const height = document.body.offsetHeight
       this.width = width
       this.height = height
     }
@@ -122,6 +124,10 @@ export default {
     this.timer = setInterval(_=>{
       this.allRequest()
     }, 3000)
+    // 监听屏幕变化
+    window.onresize = ()=> {
+      this.getResolution()
+    }
   },
   created(){
     this.getResolution()

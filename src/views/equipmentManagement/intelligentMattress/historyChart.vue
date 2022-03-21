@@ -6,7 +6,7 @@
         <BasicInfo title="历史基本信息" :basicData="basicData" />
       </div>
       <div class="rightCon">
-        <userInfo />
+        <userInfo :userInfo="userInfo" />
       </div>
     </div>
     <div class="historyEcharts">
@@ -35,6 +35,8 @@ export default {
       basicData: {},
       // prop echarts data
       echartsData: {},
+      // prop userInfo data
+      userInfo: {},
       // 轮循
       timer: null
     }
@@ -74,21 +76,32 @@ export default {
         }
       })
     },
+    getUserInfo(userId, equipmentId){
+      return request({
+        url: 'mattress/findEquipmentInfoAndUsrInfo',
+        methods: 'get',
+        params: {
+          userId,
+          equipmentId
+        }
+      })
+    },
     allRequest(){
-      const requestAll = [this.getBasicData(this.userId, this.equipmentId), this.getEchartsData(this.userId, this.equipmentId)]
+      const requestAll = [this.getBasicData(this.userId, this.equipmentId), this.getEchartsData(this.userId, this.equipmentId), this.getUserInfo(this.userId, this.equipmentId)]
       this.loading_s()
       Promise.all(requestAll).then(res=>{
         this.basicData = res[0].data
         this.echartsData = res[1]
+        this.userInfo = res[2].data.userInfo
       }).finally(_=>{
         this.closeLoading()
       })
     }
   },
   mounted(){
-    if( this.$route.params !== {} ){
-      this.userId = this.$route.params.userId
-      this.equipmentId = this.$route.params.equipmentId
+    if( this.$route.query !== {} ){
+      this.userId = Number(this.$route.query.userId)
+      this.equipmentId = Number(this.$route.query.equipmentId)
       this.allRequest()
       this.timer = setInterval(_ => {
         this.timerBasicData()

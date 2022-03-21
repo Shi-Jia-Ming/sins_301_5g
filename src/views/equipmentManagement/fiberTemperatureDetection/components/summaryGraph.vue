@@ -10,7 +10,7 @@
         <router-link :to="{
           path: '/equipment/fiberHistoryChart',
           name: 'FiberHistoryChart',
-          params: {
+          query: {
             userId: this.userId,
             equipmentId: this.equipmentId
           }
@@ -79,7 +79,7 @@ export default {
             symbol: 'circle',
             smooth: true,
             itemStyle: {
-              color: '#ffa858'
+              color: '#00feff'
             }
           },
           {

@@ -10,7 +10,7 @@
         <router-link :to="{
           path: '/equipment/mattressHistoryChart',
           name: 'MattressHistoryChart',
-          params: {
+          query: {
             userId: this.userId,
             equipmentId: this.equipmentId
           }
