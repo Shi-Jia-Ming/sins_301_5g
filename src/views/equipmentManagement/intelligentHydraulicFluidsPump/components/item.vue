@@ -6,8 +6,8 @@
           <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" />
         </div>
         <div class="info">
-          <div class="name">{{ item.status ? item.userName : '无人在床' }}</div>
-          <div class="number">{{ item.status ? item.equipmentCode : '' }}</div>
+          <div class="name">{{ item.status ? item.userName : '设备离线' }}</div>
+          <div class="number">{{ item.equipmentCode }}</div>
         </div>
       </div>
       <div class="bot">

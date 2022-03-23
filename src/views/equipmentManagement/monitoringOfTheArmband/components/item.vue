@@ -7,7 +7,7 @@
         </div>
         <div class="info">
           <div class="name">{{ item.status ? item.userName : '设备离线' }}</div>
-          <div class="number">{{ item.status ? item.equipmentCode : '' }}</div>
+          <div class="number">{{ item.equipmentCode }}</div>
         </div>
       </div>
       <div class="bot">

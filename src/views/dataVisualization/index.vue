@@ -7,8 +7,8 @@
     </div>
     <div class="content">
       <div class="leftCon">
-        <Item :propData="mattress" :itemLoading="itemLoading" title="高灵敏度婴儿体征监测仪" />
-        <Item :propData="arm" :itemLoading="itemLoading" title="便携式臂环生命体征监测器" />
+        <Item :propData="mattress" :itemLoading="itemLoading" title="高灵敏度婴儿生命体征监测仪" />
+        <Item :propData="arm" :itemLoading="itemLoading" title="便携式臂环体温心率设备" />
         <Item :propData="fiber" :itemLoading="itemLoading" title="高精度多通道温度监测系统" />
       </div>
       <div class="centerCon">
@@ -52,7 +52,7 @@ export default {
       itemLoading: false,
       // Introduction
       introductionLoading: false,
-      content: '',
+      content: [],
       // warningInfo
       warnInfoLoading: false,
       listData: [],
@@ -103,7 +103,11 @@ export default {
         this.pump = pump
 
         this.introductionLoading = false
-        this.content = res[1].data
+        // this.content = res[1].data
+        this.content = []
+        for(let i = 0; i < 3; i++){
+          this.content.push(res[1].data)
+        }
 
         this.warnInfoLoading = false
         this.listData = res[2].data

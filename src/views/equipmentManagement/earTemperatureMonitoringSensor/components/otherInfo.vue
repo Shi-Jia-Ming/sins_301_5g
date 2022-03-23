@@ -70,7 +70,7 @@
       <div class="content">
         <div class="list normal">
           <div class="text">正常：</div>
-          <div class="val">T≤37.5°C</div>
+          <div class="val">35℃&lt;T≤37.5℃</div>
         </div>
         <div class="list warning">
           <div class="text">偏高：</div>

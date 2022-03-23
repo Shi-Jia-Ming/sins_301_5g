@@ -42,6 +42,16 @@ export default {
       dateValue: '',
       // echarts配置项
       option: {
+        dataZoom: [
+          {
+            type: 'inside',
+            throttle: '50',
+            minValueSpan: 6,
+            start: 1,
+            end: 50,
+            zoomLock: true
+          }
+        ],
         tooltip: {
           trigger: "axis"
         },

@@ -70,15 +70,15 @@
       <div class="content">
         <div class="list normal">
           <div class="text">正常：</div>
-          <div class="val">HR ≤ 150bpm</div>
+          <div class="val">50bpm&lt;HR≤100bpm</div>
         </div>
         <div class="list warning">
           <div class="text">偏高：</div>
-          <div class="val">150 &lt; HR ≤ 180bpm</div>
+          <div class="val">100bpm&lt;HR≤160bpm</div>
         </div>
         <div class="list error">
           <div class="text">异常：</div>
-          <div class="val">HR &gt; 180bpm</div>
+          <div class="val">HR&gt;160bpm</div>
         </div>
       </div>
     </div>
@@ -93,7 +93,7 @@
       <div class="content">
         <div class="list normal">
           <div class="text">正常：</div>
-          <div class="val">T≤37.5°C</div>
+          <div class="val">35℃≤T≤37.5℃</div>
         </div>
         <div class="list warning">
           <div class="text">偏高：</div>

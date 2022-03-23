@@ -6,11 +6,6 @@
       <span>历史数据统计图</span>
     </div>
     <div class="actionBar">
-      <!-- <div class="type">
-        <div v-for="(item, index) in dateTypeArr" :key="item" :class=" index === current ? 'active' : '' " @click="toggleType(index)">
-          {{ item }}
-        </div>
-      </div> -->
       <div class="date">
         <el-date-picker
           v-model="dateValue"
@@ -42,6 +37,16 @@ export default {
       dateValue: '',
       // echarts配置项
       option: {
+        dataZoom: [
+          {
+            type: 'inside',
+            throttle: '50',
+            minValueSpan: 6,
+            start: 1,
+            end: 50,
+            zoomLock: true
+          }
+        ],
         tooltip: {
           trigger: "axis"
         },
@@ -69,7 +74,9 @@ export default {
               lineStyle: {
                 color: '#a600ff'
               }
-            }
+            },
+            min: 34,
+            max: 44
           },
           {
             type: 'value',

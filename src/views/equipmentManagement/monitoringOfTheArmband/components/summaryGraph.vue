@@ -52,6 +52,16 @@ export default {
   data() {
     return {
       option: {
+        dataZoom: [
+          {
+            type: 'inside',
+            throttle: '50',
+            minValueSpan: 6,
+            start: 1,
+            end: 50,
+            zoomLock: true
+          }
+        ],
         tooltip: {
           trigger: "axis"
         },
@@ -79,7 +89,9 @@ export default {
               lineStyle: {
                 color: '#a600ff'
               }
-            }
+            },
+            min: 34,
+            max: 44
           },
           {
             type: 'value',

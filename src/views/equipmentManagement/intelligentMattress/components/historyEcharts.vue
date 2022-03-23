@@ -42,6 +42,16 @@ export default {
       dateValue: '',
       // echarts配置项
       option: {
+        dataZoom: [
+          {
+            type: 'inside',
+            throttle: '50',
+            minValueSpan: 6,
+            start: 1,
+            end: 50,
+            zoomLock: true
+          }
+        ],
         tooltip: {
           trigger: "axis"
         },
@@ -63,21 +73,21 @@ export default {
         yAxis: [
           {
             type: 'value',
-            name: '心率（bpm）',
+            name: '呼吸（R）',
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#a58bf6'
+                color: '#ff007c'
               }
             }
           },
           {
             type: 'value',
-            name: '呼吸（R）',
+            name: '心率（bpm）',
             axisLine: {
               show: true,
               lineStyle: {
-                color: '#f8b542'
+                color: '#a58bf6'
               }
             }
           }
@@ -91,7 +101,7 @@ export default {
             yAxisIndex: 0,
             smooth: true,
             itemStyle: {
-              color: '#f8b542'
+              color: '#ff007c'
             }
           },
           {

@@ -68,7 +68,7 @@
         </div>
       </div>
       <div class="content">
-        <div class="list error">
+        <!-- <div class="list error">
           <div class="text">气泡报警</div>
         </div>
         <div class="list error">
@@ -80,6 +80,9 @@
         <div class="list error">
           <div class="text">电池电量过低报警</div>
           <div class="val" style="margin-left: 10px;">电量≤15%</div>
+        </div> -->
+        <div v-for="item in listArray" :key="item.key" class="list" :class=" warningArr.includes(item.key) ? 'error_animate' : 'normal' "> 
+          {{ item.val }}
         </div>
       </div>
     </div>
@@ -96,6 +99,60 @@ export default {
     equipmentInfo: {
       type: Object,
       default: ()=> {}
+    },
+    warningArr: {
+      type: Array,
+      default: ()=> []
+    }
+  },
+  data() {
+    return {
+      listArray: [
+        {
+          key: 'QP',
+          val: '气泡'
+        },
+        {
+          key: 'JS',
+          val: '结束'
+        },
+        {
+          key: 'WL',
+          val: '网络'
+        },
+        {
+          key: 'BB',
+          val: '背板'
+        },
+        {
+          key: 'ZS',
+          val: '截取阻塞信息'
+        },
+        {
+          key: 'DLJD',
+          val: '电池电量极低'
+        },
+        {
+          key: 'DLD',
+          val: '电池电量低'
+        },
+        {
+          key: 'YJ',
+          val: '预警'
+        },
+        {
+          key: 'TZ',
+          val: '停止'
+        },
+        {
+          key: 'KVO',
+          val: 'kvo报警'
+        },
+        {
+          key: 'CC',
+          val: '超出范围'
+        }
+      ]
     }
   }
 }
@@ -201,6 +258,23 @@ export default {
         background-color: #ff001e;
       }
     }
+
+    .error_animate{
+      padding-left: 20px;
+      position: relative;
+      &::after{
+        content: "";
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        left: 0;
+        background-color: #ff001e;
+        animation: error_ani 1.5s infinite;
+      }
+    }
   }
   .content.lx_flex{
     align-items: center;
@@ -212,6 +286,19 @@ export default {
         border-radius: 5px;
       }
     }
+  }
+}
+
+// animate
+@keyframes error_ani {
+  0% {
+    opacity: 0.2;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.2;
   }
 }
 </style>

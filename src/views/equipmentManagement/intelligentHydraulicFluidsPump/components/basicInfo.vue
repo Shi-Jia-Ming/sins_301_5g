@@ -37,7 +37,7 @@
                 剩余时间
               </div>
               <div class="module_val">
-                {{ basicData.residueTime || 0 }}
+                {{ basicData.residueTime || 0 }}&nbsp;Min
               </div>
             </div>
           </div>

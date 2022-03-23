@@ -12,7 +12,7 @@
       </div>
     </div>
     <div class="rightCon">
-      <OtherInfo :equipmentInfo="equipmentInfo" :userInfo="userInfo" />
+      <OtherInfo :equipmentInfo="equipmentInfo" :userInfo="userInfo" :warningArr="warningArr" />
     </div>
   </div>
 </template>
@@ -34,6 +34,7 @@ export default {
       userId: null,
       equipmentId: null,
       userInfo: {},
+      warningArr: [],
       equipmentInfo: {},
       // prop echarts data
       echartsData: {},
@@ -92,7 +93,10 @@ export default {
           this.equipmentInfo = res[0].data.equipmentInfo
           this.echartsData = res[1].data
           this.basicData = res[2].data
+          this.warningArr = res[2].data?.warnInfo
         }else{
+          this.echartsData = res[1].data
+          this.warningArr = res[2].data?.warnInfo
           if( res[2].data.status !== 0 ){
             this.basicData = res[2].data
           }
