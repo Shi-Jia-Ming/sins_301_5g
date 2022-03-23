@@ -50,7 +50,7 @@ export default {
             text = 'error'
             break;
           default:
-            text = 'disable'
+            text = 'normal'
             break;
         }
         return text

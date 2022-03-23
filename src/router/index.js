@@ -32,104 +32,103 @@ export const constantRoutes = [
     redirect: '/equipment/mattress',
     children: [
       {
-        path: 'mattress',
-        name: 'Mattress',
-        component: () => import('@/views/equipmentManagement/intelligentMattress/index'),
-        meta: { title: '智能床垫' }
-      },
-      {
-        path: 'mattressDetail',
-        name: 'MattressDetail',
-        component: ()=> import('@/views/equipmentManagement/intelligentMattress/detail'),
-        hidden: true,
-        meta: { title: '智能床垫-详情' }
-      },
-      {
-        path: 'mattressHistoryChart',
-        name: 'MattressHistoryChart',
-        component: ()=> import('@/views/equipmentManagement/intelligentMattress/historyChart'),
-        hidden: true,
-        meta: { title: '智能床垫历史统计图' }
-      },
-      {
-        path: 'armband',
-        name: 'Armband',
-        component: () => import('@/views/equipmentManagement/monitoringOfTheArmband/index'),
-        meta: { title: '监测臂环' }
-      },
-      {
-        path: 'armbandDetail',
-        name: 'ArmbandDetail',
-        component: ()=> import('@/views/equipmentManagement/monitoringOfTheArmband/detail'),
-        hidden: true,
-        meta: { title: '监测臂环-详情' }
-      },
-      {
-        path: 'armbandHistoryChart',
-        name: 'ArmbandHistoryChart',
-        component: ()=> import('@/views/equipmentManagement/monitoringOfTheArmband/historyChart'),
-        hidden: true,
-        meta: { title: '监测臂环历史统计图' }
-      },
-      {
-        path: 'fiber',
-        name: ' Fiber',
-        component: ()=> import('@/views/equipmentManagement/fiberTemperatureDetection/index'),
-        meta: { title: '光纤测温' }
-      },
-      {
-        path: 'fiberDetail',
-        name: 'FiberDetail',
-        component: ()=> import('@/views/equipmentManagement/fiberTemperatureDetection/detail'),
-        hidden: true,
-        meta: { title: '光纤测温-详情' }
-      },
-      {
-        path: 'fiberHistoryChart',
-        name: 'FiberHistoryChart',
-        component: ()=> import('@/views/equipmentManagement/fiberTemperatureDetection/historyChart'),
-        hidden: true,
-        meta: { title: '光纤测温历史统计图' }
-      },
-      {
         path: 'infusionPump',
         name: ' InfusionPump',
         component: ()=> import('@/views/equipmentManagement/intelligentHydraulicFluidsPump/index'),
-        meta: { title: '智能控程输液泵' }
+        meta: { title: '便携式智能输液泵' }
       },
       {
         path: 'infusionPumpDetail',
         name: 'InfusionPumpDetail',
         component: ()=> import('@/views/equipmentManagement/intelligentHydraulicFluidsPump/detail'),
         hidden: true,
-        meta: { title: '智能控程输液泵-详情' }
+        meta: { title: '便携式智能输液泵-详情' }
       },
       {
         path: 'infusionPumpHistoryChart',
         name: 'InfusionPumpHistoryChart',
         component: ()=> import('@/views/equipmentManagement/intelligentHydraulicFluidsPump/historyChart'),
         hidden: true,
-        meta: { title: '智能控程输液泵历史统计图' }
+        meta: { title: '便携式智能输液泵历史统计图' }
+      },
+      {
+        path: 'mattress',
+        name: 'Mattress',
+        component: () => import('@/views/equipmentManagement/intelligentMattress/index'),
+        meta: { title: '睡眠生命体征监测垫' }
+      },
+      {
+        path: 'mattressDetail',
+        name: 'MattressDetail',
+        component: ()=> import('@/views/equipmentManagement/intelligentMattress/detail'),
+        hidden: true,
+        meta: { title: '睡眠生命体征监测垫-详情' }
+      },
+      {
+        path: 'mattressHistoryChart',
+        name: 'MattressHistoryChart',
+        component: ()=> import('@/views/equipmentManagement/intelligentMattress/historyChart'),
+        hidden: true,
+        meta: { title: '睡眠生命体征监测垫历史统计图' }
+      },
+      {
+        path: 'fiber',
+        name: ' Fiber',
+        component: ()=> import('@/views/equipmentManagement/fiberTemperatureDetection/index'),
+        meta: { title: '便携式核心体温测量仪' }
+      },
+      {
+        path: 'fiberDetail',
+        name: 'FiberDetail',
+        component: ()=> import('@/views/equipmentManagement/fiberTemperatureDetection/detail'),
+        hidden: true,
+        meta: { title: '便携式核心体温测量仪-详情' }
+      },
+      {
+        path: 'fiberHistoryChart',
+        name: 'FiberHistoryChart',
+        component: ()=> import('@/views/equipmentManagement/fiberTemperatureDetection/historyChart'),
+        hidden: true,
+        meta: { title: '便携式核心体温测量仪历史统计图' }
+      },{
+        path: 'armband',
+        name: 'Armband',
+        component: () => import('@/views/equipmentManagement/monitoringOfTheArmband/index'),
+        meta: { title: '运动训练体征监测臂环' }
+      },
+      {
+        path: 'armbandDetail',
+        name: 'ArmbandDetail',
+        component: ()=> import('@/views/equipmentManagement/monitoringOfTheArmband/detail'),
+        hidden: true,
+        meta: { title: '运动训练体征监测臂环-详情' }
+      },
+      {
+        path: 'armbandHistoryChart',
+        name: 'ArmbandHistoryChart',
+        component: ()=> import('@/views/equipmentManagement/monitoringOfTheArmband/historyChart'),
+        hidden: true,
+        meta: { title: '运动训练体征监测臂环历史统计图' }
       },
       {
         path: 'earTemperature',
         name: ' EarTemperature',
         component: ()=> import('@/views/equipmentManagement/earTemperatureMonitoringSensor/index'),
-        meta: { title: '耳温监测传感器' }
+        meta: { title: '运动核心体温监测耳机' }
       },
       {
         path: 'earTemperaturePumpDetail',
         name: 'EarTemperaturePumpDetail',
         component: ()=> import('@/views/equipmentManagement/earTemperatureMonitoringSensor/detail'),
         hidden: true,
-        meta: { title: '耳温监测传感器-详情' }
+        meta: { title: '运动核心体温监测耳机-详情' }
       },
       {
         path: 'earTemperatureHistoryChart',
         name: 'EarTemperatureHistoryChart',
         component: ()=> import('@/views/equipmentManagement/earTemperatureMonitoringSensor/historyChart'),
         hidden: true,
-        meta: { title: '耳温监测传感器历史统计图' }
+        meta: { title: '运动核心体温监测耳机历史统计图' }
       }
     ]
   },

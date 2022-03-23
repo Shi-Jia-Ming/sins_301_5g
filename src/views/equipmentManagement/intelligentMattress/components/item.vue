@@ -6,7 +6,7 @@
             <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500">
           </div>
           <div class="info">
-            <div class="name">{{ item.status ? item.userName : '无人在床' }}</div>
+            <div class="name">{{ item.status ? item.userName : '设备离线' }}</div>
             <div class="number">{{ item.equipmentCode }}</div>
           </div>
         </div>
@@ -61,7 +61,7 @@
                 设备状态
               </span>
               <span class="status" :class=" item.stopBreatheSign < 25 ? 'normal_status' : item.stopBreatheSign === 25 ? 'warning_status' : 'error_status' ">
-                {{ item.stopBreatheSign || 0 }}
+                {{ item.stopBreatheSign < 25 ? '正常' : item.stopBreatheSign === 25 ? '异常' : '无光' }}
               </span>
             </div>
           </div>

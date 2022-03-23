@@ -6,7 +6,7 @@
       <span>{{title}}</span>
     </div>
     <div class="itemBox">
-      <div class="item" :class=" basicData.heartRateStatus === 1 ? 'normal' : basicData.heartRateStatus === 2 ? 'warning' : 'error' ">
+      <div class="item" :class=" basicData.heartRateStatus === 1 ? 'normal' : basicData.heartRateStatus === 2 ? 'warning' : basicData.heartRateStatus === 3 ? 'error' : 'normal' ">
         <div class="top">
           <div class="left">心率</div>
           <div class="right">
@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="item" :class=" basicData.temperatureStatus === 1 ? 'normal' : basicData.temperatureStatus === 2 ? 'warning' : 'error' ">
+      <div class="item" :class=" basicData.temperatureStatus === 1 ? 'normal' : basicData.temperatureStatus === 2 ? 'warning' : basicData.temperatureStatus === 2 ? 'error' : 'normal' ">
         <div class="top">
           <div class="left">体温</div>
           <div class="right">
