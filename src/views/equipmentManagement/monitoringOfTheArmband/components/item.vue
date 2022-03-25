@@ -31,7 +31,7 @@
           </div>
           <div class="list_flex">
             <img src="@/assets/icon_images/icon-xinlv.png" />
-            <span>{{ item.heartRate || 0 }}&nbsp;bmp</span>
+            <span>{{ item.heartRate || 0 }}&nbsp;bpm</span>
           </div>
         </div>
       </div>
