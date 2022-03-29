@@ -15,7 +15,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span><countTo :startVal='0' :endVal='basicData.heartRate || 0' :duration='3000' /></span>bpm
+            <span>{{ basicData.heartRate || 0 }}</span> bpm
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-xinlv.png" />
@@ -44,7 +44,7 @@
         </div>
         <div class="bot">
           <div class="left">
-            <span><countTo :startVal='0' :endVal='basicData.stepNumber || 0' :duration='3000' /></span>步
+            <span>{{ basicData.stepNumber || 0 }}</span> 步
           </div>
           <div class="right">
             <img src="@/assets/icon_images/icon-bushu.png" />
@@ -56,11 +56,7 @@
 </template>
 
 <script>
-import countTo from 'vue-count-to'
 export default {
-  components: {
-    countTo
-  },
   props: {
     title: {
       type: String,

@@ -20,8 +20,8 @@
                 已输液量/总量
               </div>
               <div class="module_val">
-                <countTo :startVal='0' :endVal='basicData.alreadyLiquid' :duration='3000' />ML/
-                <countTo :startVal='0' :endVal='basicData.totalLiquid' :duration='3000' />ML
+                {{ basicData.alreadyLiquid || 0 }}ML/
+                {{ basicData.totalLiquid || 0 }}ML
               </div>
             </div>
             <div class="module">
@@ -29,7 +29,7 @@
                 输液速度
               </div>
               <div class="module_val">
-                <countTo :startVal='0' :endVal='basicData.speed' :duration='3000' />ML/H
+                {{ basicData.speed || 0 }}ML/H
               </div>
             </div>
             <div class="module">
@@ -60,11 +60,7 @@
 </template>
 
 <script>
-import countTo from 'vue-count-to'
 export default {
-  components: {
-    countTo
-  },
   computed: {
     InfusionStatus(){
       return (item)=> {

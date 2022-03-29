@@ -90,9 +90,9 @@ export default {
       Promise.all(requestAll).then(res=>{
         this.userInfo = res[0].data.userInfo
         this.equipmentInfo = res[0].data.equipmentInfo
-        this.echartsTime = res[1].time
-        this.echartsBreathe = res[1].breathe
-        this.echartsBpm = res[1].bpm
+        this.echartsTime = res[1].data.time
+        this.echartsBreathe = res[1].data.breathe
+        this.echartsBpm = res[1].data.heartRate
         this.basicData = res[2].data
       }).finally(_=>{
         this.closeLoading()

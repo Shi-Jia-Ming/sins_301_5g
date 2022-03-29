@@ -25,7 +25,7 @@
                 在床状态
               </span>
               <span class="status normal_status">
-                {{ !item.inBedStatus ? '无人在床' : item.inBedStatus === 1 ? '床垫受压' : '有人在床' }}
+                {{ item.inBedStatus === 1 ? '床垫受压' : item.inBedStatus === 2 ? '有人在床' : '无人在床' }}
               </span>
             </div>
           </div>
@@ -34,7 +34,7 @@
               <span class="text">
                 呼吸
               </span>
-              <span class="status" :class=" !item.inBedStatus ? 'normal_status' : item.status ? item.breathe > 30 && item.breathe <= 40  ? 'normal_status' : item.breathe > 40 && item.breathe <= 42 ? 'warning_status' : 'error_status' : 'normal_status'  ">
+              <span class="status" :class=" item.inBedStatus === 2 ? item.breathe > 10 && item.breathe <= 20 ? 'normal_status' : item.breathe > 20 && item.breathe <= 24 ? 'warning_status' : 'error_status' : 'normal_status' ">
                 {{ item.breathe || 0 }}&nbsp;次/分
               </span>
             </div>

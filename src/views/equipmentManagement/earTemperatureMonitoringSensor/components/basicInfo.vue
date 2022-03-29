@@ -10,7 +10,7 @@
         <div class="top">
           <div class="left">体温</div>
           <div class="right">
-            {{ basicData.temperatureStatus === 0 ? '' : basicData.temperatureStatus === 1 ? '正常' : basicData.temperatureStatus === 2 ? '警告' : basicData.temperatureStatus === 3 ? '异常' : '' }}
+            {{ basicData.temperatureStatus === 0 ? '' : basicData.temperatureStatus === 1 ? '正常' : basicData.temperatureStatus === 2 ? '警告' : basicData.temperatureStatus === 3 ? '异常' : '正常' }}
           </div>
         </div>
         <div class="bot">
@@ -27,11 +27,7 @@
 </template>
 
 <script>
-import countTo from 'vue-count-to'
 export default {
-  components: {
-    countTo
-  },
   computed: {
     classStatus(){
       return function(temperature){

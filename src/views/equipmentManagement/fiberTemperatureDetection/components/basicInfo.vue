@@ -87,11 +87,7 @@
 </template>
 
 <script>
-import countTo from 'vue-count-to'
 export default {
-  components: {
-    countTo
-  },
   computed: {
     textStatus(){
       return function(temperature){
@@ -108,6 +104,9 @@ export default {
             break;
           case 3:
             text = '异常'
+            break;
+          default:
+            text = '正常'
             break;
         }
         return text
@@ -130,7 +129,7 @@ export default {
             text = 'error'
             break;
           default:
-            text = 'disable'
+            text = 'normal'
             break;
         }
         return text

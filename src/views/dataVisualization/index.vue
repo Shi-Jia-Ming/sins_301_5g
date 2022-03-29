@@ -1,15 +1,14 @@
 <!-- 数据大屏 -->
 <template>
   <div id="dataV" :style="{width: width + 'px', height: height + 'px'}">
-  <!-- <dv-full-screen-container id="dataV"> -->
     <div class="header">
       <HeaderContent />
     </div>
     <div class="content">
       <div class="leftCon">
-        <Item :propData="mattress" :itemLoading="itemLoading" title="高灵敏度婴儿生命体征监测仪" />
-        <Item :propData="arm" :itemLoading="itemLoading" title="便携式臂环体温心率设备" />
-        <Item :propData="fiber" :itemLoading="itemLoading" title="高精度多通道温度监测系统" />
+        <Item :propData="mattress" :itemLoading="itemLoading" title="睡眠生命体征监测垫" />
+        <Item :propData="arm" :itemLoading="itemLoading" title="运动训练体征监测臂环" />
+        <Item :propData="fiber" :itemLoading="itemLoading" title="便携式核心体温测量仪" />
       </div>
       <div class="centerCon">
         <bigImg />
@@ -17,11 +16,10 @@
       </div>
       <div class="rightCon">
         <Introduction :introductionLoading="introductionLoading" :content="content" />
-        <Item :propData="pump" :itemLoading="itemLoading" title="便携式输液装置" />
-        <Item :propData="ear" :itemLoading="itemLoading" title="耳挂式生命体征监测仪" />
+        <Item :propData="pump" :itemLoading="itemLoading" title="便携式智能输液泵" />
+        <Item :propData="ear" :itemLoading="itemLoading" title="运动核心体温监测耳机" />
       </div>
     </div>
-  <!-- </dv-full-screen-container> -->
   </div>
 </template>
 
