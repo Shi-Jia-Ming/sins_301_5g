@@ -6,11 +6,6 @@
       <span>历史数据统计图</span>
     </div>
     <div class="actionBar">
-      <!-- <div class="type">
-        <div v-for="(item, index) in dateTypeArr" :key="item" :class=" index === current ? 'active' : '' " @click="toggleType(index)">
-          {{ item }}
-        </div>
-      </div> -->
       <div class="date">
         <el-date-picker
           v-model="dateValue"

@@ -86,7 +86,7 @@ export default {
     }
     .warning_status{
       background-color: #ffb444;
-      color: #ce4c1b;
+      color: #ff8300;
     }
     .error_status{
       background-color: #ff214b;

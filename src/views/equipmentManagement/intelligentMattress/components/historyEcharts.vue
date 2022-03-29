@@ -138,10 +138,10 @@ export default {
   watch: {
     echartsData: {
       handler(){
-        const { bpm, breathe, time } = this.echartsData
+        const { heartRate, breathe, time } = this.echartsData
         this.option.xAxis.data = time
         this.option.series[0].data = breathe
-        this.option.series[1].data = bpm
+        this.option.series[1].data = heartRate
         this.initEcharts()
       },
       deep: true
@@ -178,10 +178,10 @@ export default {
           equipmentId: this.equipmentId
         }
       }).then(res=>{
-        const { bpm, breathe, time } = res.data
+        const { heartRate, breathe, time } = res.data
         this.option.xAxis.data = time
         this.option.series[0].data = breathe
-        this.option.series[1].data = bpm
+        this.option.series[1].data = heartRate
         if( this.exampleEcharts ){
           this.exampleEcharts.setOption(this.option, true)
         }else{

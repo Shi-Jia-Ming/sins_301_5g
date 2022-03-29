@@ -141,7 +141,7 @@ export default {
   }
   .warning{
     background-color: #fff8f3;
-    color: #ffb546;
+    color: #ff8300;
   }
   .error{
     background-color: #ffeeee;

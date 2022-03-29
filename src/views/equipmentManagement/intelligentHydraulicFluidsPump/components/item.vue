@@ -154,7 +154,7 @@ export default {
   }
   .warning_status{
     background-color: #ffb444;
-    color: #ce4c1b;
+    color: #ff8300;
   }
   .error_status{
     background-color: #ff214b;
@@ -264,7 +264,7 @@ export default {
           color: #00c6bb;
         }
         .text_warning {
-          color: #ffb544;
+          color: #ff8300;
         }
       }
     }

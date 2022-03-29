@@ -8,7 +8,7 @@
       </div>
       <!-- 统计图 -->
       <div class="summaryGraph">
-        <SummaryGraph :time="echartsTime" :breathe="echartsBreathe" :bpm="echartsBpm" :userId="userId" :equipmentId="equipmentId" />
+        <SummaryGraph :echartsData="echartsData" :userId="userId" :equipmentId="equipmentId" />
       </div>
     </div>
     <div class="rightCon">
@@ -36,9 +36,7 @@ export default {
       userInfo: {},
       equipmentInfo: {},
       // prop echarts data
-      echartsTime: [],
-      echartsBreathe: [],
-      echartsBpm: [],
+      echartsData: {},
       // prop basicInfo data
       basicData: {},
       // 轮循
@@ -90,9 +88,7 @@ export default {
       Promise.all(requestAll).then(res=>{
         this.userInfo = res[0].data.userInfo
         this.equipmentInfo = res[0].data.equipmentInfo
-        this.echartsTime = res[1].data.time
-        this.echartsBreathe = res[1].data.breathe
-        this.echartsBpm = res[1].data.heartRate
+        this.echartsData = res[1].data
         this.basicData = res[2].data
       }).finally(_=>{
         this.closeLoading()

@@ -91,7 +91,8 @@ export default {
       this.loading_s()
       Promise.all(requestAll).then(res=>{
         this.basicData = res[0].data
-        this.echartsData = res[1]
+        this.echartsData = res[1].data
+        console.log(res[1])
         this.userInfo = res[2].data.userInfo
       }).finally(_=>{
         this.closeLoading()

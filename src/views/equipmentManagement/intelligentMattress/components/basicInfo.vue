@@ -123,7 +123,7 @@ export default {
   }
   .warning{
     background-color: #ffffee;
-    color: #fffb00;
+    color: #ff8300;
   }
   .error{
     background-color: #ffeeee;

@@ -291,10 +291,10 @@ export default {
   }
   .warning{
     background-color: #fff8f3;
-    color: #ffb546;
+    color: #ff8300;
     .rightCon{
       &::after{
-        background-color: #ffb546;
+        background-color: #ff8300;
       }
     }
   }

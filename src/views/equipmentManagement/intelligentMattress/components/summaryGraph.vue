@@ -28,17 +28,9 @@ import * as echarts from "echarts"
 
 export default {
   props: {
-    time: {
-      type: Array,
-      default: ()=> []
-    },
-    breathe: {
-      type: Array,
-      default: ()=> []
-    },
-    bpm: {
-      type: Array,
-      default: ()=> []
+    echartsData: {
+      type: Object,
+      default: ()=> {}
     },
     userId: {
       type: Number,
@@ -52,16 +44,6 @@ export default {
   data() {
     return {
       option: {
-        dataZoom: [
-          {
-            type: 'inside',
-            throttle: '50',
-            minValueSpan: 6,
-            start: 1,
-            end: 50,
-            zoomLock: true
-          }
-        ],
         tooltip: {
           trigger: "axis"
         },
@@ -77,13 +59,14 @@ export default {
         // x轴
         xAxis: {
           type: "category",
-          boundaryGap: '50%',
-          data: this.time
+          boundaryGap: false,
+          data: []
         },
         yAxis: [
           {
             type: 'value',
             name: '呼吸（R）',
+            boundaryGap: false,
             axisLine: {
               show: true,
               lineStyle: {
@@ -94,6 +77,7 @@ export default {
           {
             type: 'value',
             name: '心率（bpm）',
+            boundaryGap: false,
             axisLine: {
               show: true,
               lineStyle: {
@@ -117,7 +101,7 @@ export default {
           {
             name: "心率",
             type: "line",
-            data: this.bpm,
+            data: [],
             symbol: 'circle',
             yAxisIndex: 1,
             smooth: true,
@@ -126,29 +110,58 @@ export default {
             }
           }
         ]
-      }
+      },
+      chartDom: null,
+      chartInter: null
     }
   },
   watch: {
-    time: {
+    echartsData: {
       handler(){
-        this.option.xAxis.data = this.time
-        this.option.series[0].data = this.breathe
-        this.option.series[1].data = this.bpm
-        this.initEcharts()
+        let { breathe, heartRate, time } = this.echartsData
+        if( time.length > 200 ){
+          time = time.slice(-200)
+          heartRate = heartRate.slice(-200)
+          breathe = breathe.slice(-200)
+        }
+        if( this.option.xAxis.data.length !== 0 ){
+          if( this.option.xAxis.data[this.option.xAxis.data.length - 1] !== time[time.length - 1] ){
+            this.option.xAxis.data.push(time[time.length - 1])
+            this.option.series[0].data.push(breathe[breathe.length - 1])
+            this.option.series[1].data.push(heartRate[heartRate.length - 1])
+            this.chartDom.setOption(this.option)
+          }
+        }else{
+          this.option.xAxis.data = time
+          this.option.series[0].data = breathe
+          this.option.series[1].data = heartRate
+          this.initEcharts()
+        }
       },
       deep: true
     }
   },
   methods: {
     initEcharts() {
-      const chartDom = this.$refs.echarts;
-      echarts.init(chartDom).setOption(this.option);
-    },
+      this.chartDom = echarts.init(this.$refs.echarts)
+      this.chartDom.setOption(this.option)
+    }
   },
   mounted() {
-    
+    this.chartInter = setInterval(()=>{
+      if( this.option.xAxis.data.length > 200 ){
+        this.option.series[0].data.shift()
+        this.option.series[1].data.shift()
+        this.option.xAxis.data.shift()
+        this.chartDom.setOption(this.option)
+      }
+    },10000)
   },
+  beforeDestroy() {
+    if( this.chartInter !== null ){
+      clearInterval(this.chartInter)
+    }
+  }
 };
 </script>
 

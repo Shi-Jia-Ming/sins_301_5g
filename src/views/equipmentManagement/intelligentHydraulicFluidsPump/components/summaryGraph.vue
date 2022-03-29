@@ -44,16 +44,6 @@ export default {
   data() {
     return {
       option: {
-        dataZoom: [
-          {
-            type: 'inside',
-            throttle: '50',
-            minValueSpan: 6,
-            start: 1,
-            end: 50,
-            zoomLock: true
-          }
-        ],
         tooltip: {
           trigger: "axis"
         },
@@ -66,15 +56,15 @@ export default {
           bottom: "3%",
           containLabel: true
         },
-        // x轴
         xAxis: {
           type: "category",
-          boundaryGap: '50%',
+          boundaryGap: false,
           data: []
         },
         yAxis: [
           {
             type: 'value',
+            boundaryGap: false,
             name: '输液量（ML）',
             axisLine: {
               show: true,
@@ -90,32 +80,59 @@ export default {
             type: "line",
             data: [],
             symbol: 'circle',
-            yAxisIndex: 0,
-            smooth: true,
+            smooth: false,
             itemStyle: {
               color: '#ffa759'
             }
           }
         ]
-      }
+      },
+      chartDom: null,
+      chartInter: null
     }
   },
   watch: {
     echartsData: {
       handler(){
-        const { alreadyLiquid, time } = this.echartsData
-        this.option.xAxis.data = time
-        this.option.series[0].data = alreadyLiquid
-        this.initEcharts()
+        let { alreadyLiquid, time } = this.echartsData
+        if( time.length > 200 ){
+          time = time.slice(-200)
+          alreadyLiquid = alreadyLiquid.slice(-200)
+        }
+        if( this.option.xAxis.data.length !== 0 ){
+          if( this.option.xAxis.data[this.option.xAxis.data.length - 1] !== time[time.length - 1] ){
+            this.option.xAxis.data.push(time[time.length - 1])
+            this.option.series[0].data.push(alreadyLiquid[alreadyLiquid.length - 1])
+            this.chartDom.setOption(this.option)
+          }
+        }else{
+          this.option.xAxis.data = time
+          this.option.series[0].data = alreadyLiquid
+          this.initEcharts()
+        }
       },
       deep: true
     }
   },
   methods: {
     initEcharts() {
-      const chartDom = this.$refs.echarts;
-      echarts.init(chartDom).setOption(this.option);
-    },
+      this.chartDom = echarts.init(this.$refs.echarts)
+      this.chartDom.setOption(this.option)
+    }
+  },
+  mounted() {
+    this.chartInter = setInterval(()=>{
+      if( this.option.xAxis.data.length > 200 ){
+        this.option.series[0].data.shift()
+        this.option.xAxis.data.shift()
+        this.chartDom.setOption(this.option)
+      }
+    },10000)
+  },
+  beforeDestroy() {
+    if( this.chartInter !== null ){
+      clearInterval(this.chartInter)
+    }
   }
 }
 </script>
