@@ -1,5 +1,5 @@
 /**
- * 将时间解析为字符串
+ * 时间戳转换格式
  * @param {(Object|string|number)} time
  * @param {string} cFormat
  * @returns {string | null}
@@ -37,7 +37,7 @@ export function parseTime(time, cFormat) {
   }
   const time_str = format.replace(/{([ymdhisa])+}/g, (result, key) => {
     const value = formatObj[key]
-    // Note: getDay() returns 0 on Sunday
+    // 注意：getDay() 在星期日返回 0
     if (key === 'a') { return ['日', '一', '二', '三', '四', '五', '六'][value ] }
     return value.toString().padStart(2, '0')
   })
@@ -88,6 +88,7 @@ export function formatTime(time, option) {
 }
 
 /**
+ * 截取url参数
  * @param {string} url
  * @returns {Object}
  */
