@@ -60,8 +60,8 @@
               <span class="text">
                 设备状态
               </span>
-              <span class="status" :class=" item.stopBreatheSign < 25 ? 'normal_status' : item.stopBreatheSign === 25 ? 'warning_status' : 'error_status' ">
-                {{ item.stopBreatheSign < 25 ? '正常' : item.stopBreatheSign === 25 ? '异常' : '无光' }}
+              <span class="status" :class=" item.mattressStatus < 25 ? 'normal_status' : item.mattressStatus === 25 ? 'warning_status' : item.mattressStatus === 30 ? 'error_status' : 'normal_status' ">
+                {{ item.mattressStatus < 25 ? '正常' : item.mattressStatus === 25 ? '异常' : item.mattressStatus === 30 ? '无光' : '正常' }}
               </span>
             </div>
           </div>

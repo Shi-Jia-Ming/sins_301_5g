@@ -22,7 +22,7 @@
           </div>
         </div>
       </div>
-      <div class="item" :class=" basicData.temperatureStatus === 1 ? 'normal' : basicData.temperatureStatus === 2 ? 'warning' : basicData.temperatureStatus === 2 ? 'error' : 'normal' ">
+      <div class="item" :class=" basicData.temperatureStatus === 1 ? 'normal' : basicData.temperatureStatus === 2 ? 'warning' : basicData.temperatureStatus === 3 ? 'error' : 'normal' ">
         <div class="top">
           <div class="left">体温</div>
           <div class="right">
