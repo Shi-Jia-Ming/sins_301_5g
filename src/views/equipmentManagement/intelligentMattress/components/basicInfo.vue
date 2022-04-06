@@ -6,11 +6,11 @@
       <span>{{title}}</span>
     </div>
     <div class="itemBox">
-      <div class="item" :class=" basicData.heartRateStatus === 1 ? 'normal' : basicData.heartRateStatus === 2 ? 'warning' : 'error' ">
+      <div class="item" :class=" basicData.heartRateStatus === 1 ? 'normal' : basicData.heartRateStatus === 2 ? 'warning' : basicData.heartRateStatus === 3 ? 'error' : 'normal' ">
         <div class="top">
           <div class="left">心率</div>
           <div class="right">
-            {{ basicData.heartRateStatus === 1 ? '正常' : basicData.heartRateStatus === 2 ? '警告' : '异常' }}
+            {{ basicData.heartRateStatus === 1 ? '正常' : basicData.heartRateStatus === 2 ? '警告' : basicData.heartRateStatus === 3 ? '异常' : '正常' }}
           </div>
         </div>
         <div class="bot">
@@ -22,11 +22,11 @@
           </div>
         </div>
       </div>
-      <div class="item" :class=" basicData.breatheStatus === 1 ? 'normal' : basicData.breatheStatus === 2 ? 'warning' : 'error' ">
+      <div class="item" :class=" basicData.breatheStatus === 1 ? 'normal' : basicData.breatheStatus === 2 ? 'warning' : basicData.breatheStatus === 3 ? 'error' : 'normal' ">
         <div class="top">
           <div class="left">呼吸</div>
           <div class="right">
-            {{ basicData.breatheStatus === 1 ? '正常' : basicData.breatheStatus === 2 ? '警告' : '异常' }}
+            {{ basicData.breatheStatus === 1 ? '正常' : basicData.breatheStatus === 2 ? '警告' : basicData.breatheStatus === 3 ? '异常' : '正常' }}
           </div>
         </div>
         <div class="bot">
