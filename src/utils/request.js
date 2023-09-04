@@ -1,9 +1,13 @@
 import axios from 'axios'
 import { Message } from 'element-ui'
 
+//解决跨域cookie
+axios.defaults.withCredentials = true;
+
 const service = axios.create({
   // baseURL: process.env.VUE_APP_BASE_API,
-  baseURL: 'http://47.108.67.1/eqServer/',
+  baseURL: 'http://222.194.7.2:9999/equipment/',
+  // baseURL: 'http://127.0.0.1:9999/equipment',
   timeout: 100000
 })
 service.interceptors.request.use(

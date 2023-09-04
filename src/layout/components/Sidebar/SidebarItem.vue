@@ -1,17 +1,23 @@
+<!-- 侧栏中的物品 -->
 <template>
   <div v-if="!item.hidden">
-    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children||onlyOneChild.noShowingChildren)&&!item.alwaysShow">
+    <template v-if="hasOneShowingChild(item.children,item) && (!onlyOneChild.children || onlyOneChild.noShowingChildren) && !item.alwaysShow">
       <app-link v-if="onlyOneChild.meta" :to="resolvePath(onlyOneChild.path)">
         <el-menu-item :index="resolvePath(onlyOneChild.path)" :class="{'submenu-title-noDropdown':!isNest}">
-          <item :icon="onlyOneChild.meta.icon||(item.meta&&item.meta.icon)" :title="onlyOneChild.meta.title" />
+          <!-- 自定义组件Item，此处为下拉框下选项 -->
+          <item :icon="onlyOneChild.meta.icon || (item.meta && item.meta.icon)" :title="onlyOneChild.meta.title" />
         </el-menu-item>
       </app-link>
     </template>
 
+    <!-- 侧边栏中的下拉框 -->
     <el-submenu v-else ref="subMenu" :index="resolvePath(item.path)" popper-append-to-body>
+      <!-- TODO 不能使用 v-slot -->
       <template slot="title">
+        <!-- 自定义组件Item，此处为下拉框 -->
         <item v-if="item.meta" :icon="item.meta && item.meta.icon" :title="item.meta.title" />
       </template>
+      <!-- 下拉框下的选项 -->
       <sidebar-item
         v-for="child in item.children"
         :key="child.path"
@@ -37,9 +43,10 @@ export default {
   mixins: [FixiOSBug],
   props: {
     // route object
+    /* 路由的Object类 */
     item: {
       type: Object,
-      required: true
+      required: true,
     },
     isNest: {
       type: Boolean,
@@ -53,7 +60,7 @@ export default {
   data() {
     // To fix https://github.com/PanJiaChen/vue-admin-template/issues/237
     // TODO: refactor with render function
-    this.onlyOneChild = null
+    this.onlyOneChild = null;
     return {}
   },
   methods: {
@@ -69,6 +76,7 @@ export default {
       })
 
       // When there is only one child router, the child router is displayed by default
+      /* 如果只显示一个子路由，则把这个路由设置为默认路由 */
       if (showingChildren.length === 1) {
         return true
       }

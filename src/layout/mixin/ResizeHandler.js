@@ -20,9 +20,10 @@ export default {
   mounted() {
     const isMobile = this.$_isMobile()
     if (isMobile) {
-      store.dispatch('app/toggleDevice', 'mobile')
-      store.dispatch('app/closeSideBar', { withoutAnimation: true })
-    }
+      /* TODO 加空的 then */
+      store.dispatch('app/toggleDevice', 'mobile').then()
+      store.dispatch('app/closeSideBar', {withoutAnimation: true}).then()
+     }
   },
   methods: {
     // use $_ for mixins properties

@@ -1,12 +1,17 @@
+<!-- 左上角的图标和标题组件 -->
 <template>
   <div class="sidebar-logo-container" :class="{'collapse':collapse}">
+    <!-- 在一个元素或组件进入和离开 DOM 时应用动画 -->
     <transition name="sidebarLogoFade">
+      <!-- 侧边栏收起时的路由连接：根目录（登录界面） -->
       <router-link v-if="collapse" key="collapse" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
+        <img v-if="logo" :src="logo" class="sidebar-logo" alt="sidebar-logo">
+        <!-- 如果logo不为空，则侧栏收起之后显示的是logo，如果为空则显示标题 -->
         <h1 v-else class="sidebar-title">{{ title }} </h1>
       </router-link>
+      <!-- 侧边栏展开时的路由连接：根目录（登录界面） -->
       <router-link v-else key="expand" class="sidebar-logo-link" to="/">
-        <img v-if="logo" :src="logo" class="sidebar-logo">
+        <img v-if="logo" :src="logo" class="sidebar-logo" alt="sidebar-logo">
         <h1 class="sidebar-title">{{ title }} </h1>
       </router-link>
     </transition>
@@ -24,13 +29,14 @@ export default {
   },
   data() {
     return {
-      title: '301-5G医疗实验室',
+      title: '睡眠监测系统',
       // logo: 'https://wpimg.wallstcn.com/69a1c46c-eb1c-4b46-8bd4-e9e686ef5251.png'
       logo: ''
     }
   }
 }
 </script>
+
 
 <style lang="scss" scoped>
 .sidebarLogoFade-enter-active {
@@ -76,7 +82,7 @@ export default {
 
   &.collapse {
     .sidebar-logo {
-      margin-right: 0px;
+      margin-right: 0;
     }
   }
 }

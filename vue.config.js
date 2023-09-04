@@ -6,7 +6,7 @@ function resolve(dir) {
   return path.join(__dirname, dir)
 }
 
-const name = '301-5G医疗实验室' // page title
+const name = '睡眠监测系统' // page title
 
 // 如果你的端口设置为 80，
 // 使用管理员权限执行命令行。
@@ -23,6 +23,7 @@ module.exports = {
   lintOnSave: false,
   productionSourceMap: false,
   devServer: {
+    host: "127.0.0.1",
     port: port,
     open: false,
     overlay: {

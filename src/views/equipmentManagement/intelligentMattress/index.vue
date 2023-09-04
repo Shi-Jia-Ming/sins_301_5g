@@ -32,6 +32,7 @@ export default {
         }
       }).then(({data})=>{
         this.dataList = data
+        console.log(data)
       }).finally(_=>{
         this.closeLoading()
       })

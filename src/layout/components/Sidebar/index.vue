@@ -1,7 +1,10 @@
 <template>
   <div :class="{'has-logo':showLogo}">
+    <!-- 自定义图标组件 -->
     <logo v-if="showLogo" :collapse="isCollapse" />
+    <!-- 滚动条，wrap-class 是包裹容器的自定义类名 -->
     <el-scrollbar wrap-class="scrollbar-wrapper">
+      <!-- 菜单栏 -->
       <el-menu
         :default-active="activeMenu"
         :collapse="isCollapse"
@@ -12,6 +15,7 @@
         :collapse-transition="false"
         mode="vertical"
       >
+        <!-- 下拉框组件 -->
         <sidebar-item v-for="route in routes" :key="route.path" :item="route" :base-path="route.path" />
       </el-menu>
     </el-scrollbar>
@@ -20,12 +24,14 @@
 
 <script>
 import { mapGetters } from 'vuex'
+/* 左上角的图标和标题组件 */
 import Logo from './Logo'
 import SidebarItem from './SidebarItem'
 import variables from '@/styles/variables.scss'
 
 export default {
   components: { SidebarItem, Logo },
+  /* 计算属性 */
   computed: {
     ...mapGetters([
       'sidebar'

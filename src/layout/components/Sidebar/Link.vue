@@ -1,4 +1,6 @@
 <template>
+  <!-- components是vue的动态渲染组件 -->
+  <!-- is是该组件的类型-->
   <component :is="type" v-bind="linkProps(to)">
     <slot />
   </component>
@@ -20,8 +22,10 @@ export default {
     },
     type() {
       if (this.isExternal) {
+        /* 链接 */
         return 'a'
       }
+      /* 路由 */
       return 'router-link'
     }
   },

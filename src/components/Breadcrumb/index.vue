@@ -1,8 +1,11 @@
 <template>
+  <!-- 面包屑标题。separator为分隔符 -->
   <el-breadcrumb class="app-breadcrumb" separator="/">
+    <!-- transition-group 用于渲染一组 v-for 中的组件 -->
     <transition-group name="breadcrumb">
       <el-breadcrumb-item v-for="(item,index) in levelList" :key="item.path">
-        <span v-if="item.redirect==='noRedirect'||index==levelList.length-1" class="no-redirect">{{ item.meta.title }}</span>
+        <!-- 如果可以查询到相关界面就用链接，否则使用文本 -->
+        <span v-if="item.redirect==='noRedirect'||index===levelList.length-1" class="no-redirect">{{ item.meta.title }}</span>
         <a v-else @click.prevent="handleLink(item)">{{ item.meta.title }}</a>
       </el-breadcrumb-item>
     </transition-group>
@@ -15,6 +18,7 @@ import pathToRegexp from 'path-to-regexp'
 export default {
   data() {
     return {
+      /* 存放标题内容 */
       levelList: null
     }
   },
@@ -24,6 +28,7 @@ export default {
     }
   },
   created() {
+    /* 获取面包屑标题 */
     this.getBreadcrumb()
   },
   methods: {
@@ -48,7 +53,7 @@ export default {
     pathCompile(path) {
       // To solve this problem https://github.com/PanJiaChen/vue-element-admin/issues/561
       const { params } = this.$route
-      var toPath = pathToRegexp.compile(path)
+      let toPath = pathToRegexp.compile(path)
       return toPath(params)
     },
     handleLink(item) {

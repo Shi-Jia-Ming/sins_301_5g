@@ -12,7 +12,7 @@
       </div>
       <div class="bot">
         <div class="list lx_flex">
-          <div class="text">已输液量/总量（ML)</div>
+          <div class="text">已输液量/总量（ML）</div>
           <div class="number">{{ item.alreadyLiquid || 0 }}/{{ item.totalLiquid || 0 }}</div>
         </div>
         <div class="list lx_flex">

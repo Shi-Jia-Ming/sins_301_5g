@@ -1,15 +1,21 @@
 <template>
+  <!-- 登录容器 -->
   <div class="login-container">
+    <!-- 登录界面的表单 -->
     <el-form ref="loginForm" :model="loginForm" :rules="loginRules" class="login-form" auto-complete="on" label-position="left">
 
+      <!-- 标题容器 -->
       <div class="title-container">
-        <h3 class="title">Login Form</h3>
+        <h3 class="title">Login</h3>
       </div>
 
+      <!-- 表单的第一个字段输入：用户名 -->
       <el-form-item prop="username">
+        <!-- 用户名字段的图标 -->
         <span class="svg-container">
           <svg-icon icon-class="user" />
         </span>
+        <!-- 用户名的输入框 -->
         <el-input
           ref="username"
           v-model="loginForm.username"
@@ -21,10 +27,14 @@
         />
       </el-form-item>
 
+
+      <!-- 表单的第二个字段输入：密码 -->
       <el-form-item prop="password">
+        <!-- 密码字段的图标 -->
         <span class="svg-container">
           <svg-icon icon-class="password" />
         </span>
+        <!--密码的输入框 -->
         <el-input
           :key="passwordType"
           ref="password"
@@ -36,27 +46,67 @@
           auto-complete="on"
           @keyup.enter.native="handleLogin"
         />
+        <!-- 显示密码按钮 -->
+        <!-- showPwd函数：更改密码的状态，显示或隐藏 -->
         <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="passwordType === 'password' ? 'eye' : 'eye-open'" />
         </span>
       </el-form-item>
 
+      <!-- 表单的第三个字段：验证码 -->
+      <el-form-item style="width: 60%" prop="identifycode">
+        <div>
+          <!-- 高是47px -->
+          <el-input
+              ref="identifycode"
+              v-model="loginForm.identifycode"
+              name="identifycode"
+              placeholder="Identifycode"
+              tabindex="3"
+              @keyup.enter.native="handleLogin"
+          />
+        </div>
+      </el-form-item>
+
+
+      <!-- 验证码图片 -->
+      <div @click="refreshCode">
+        <identify-code
+            :identifyCode="identifyCode"
+            :contentWidth="150"
+            :contentHeight="50"
+            :fontSizeMin="50"
+            style="vertical-align: middle;
+                       height: 47px;
+                       position: relative;
+                       left: 300px;
+                       top: -74px"
+        />
+      </div>
+
+      <!-- 登录按钮 -->
       <el-button :loading="loading" type="primary" style="width:100%;margin-bottom:30px;" @click.native.prevent="handleLogin">Login</el-button>
 
-      <div class="tips">
-        <span style="margin-right:20px;">username: admin</span>
-        <span> password: any</span>
-      </div>
+<!--      <div class="tips">-->
+<!--        <span style="margin-right:20px;">username: admin</span>-->
+<!--        <span> password: 111111</span>-->
+<!--      </div>-->
 
     </el-form>
   </div>
 </template>
 
 <script>
+/* 导入validUsername用于检查用户名是否合符合要求 */
 import { validUsername } from '@/utils/validate'
+import request from "@/utils/request";
+import IdentifyCode from "@/views/login/components/IdentifyCode";
+
 
 export default {
   name: 'Login',
+  components: {'identify-code': IdentifyCode},
+  /* 变量 */
   data() {
     const validateUsername = (rule, value, callback) => {
       if (!validUsername(value)) {
@@ -72,20 +122,35 @@ export default {
         callback()
       }
     }
+    const validateIdentifyCode = (rule, value, callback) => {
+      if (value !== this.identifyCode) {
+        callback(new Error('Error identifycode'))
+      } else {
+        callback()
+      }
+    }
+    /* 生成验证码的字符范围 */
+    const identifyCodes =  "abcdefhijkmnprstwxyz0123456789"
+    /* 生成的验证码 */
+    const identifyCode = ""
     return {
       loginForm: {
         username: 'admin',
-        password: '111111'
+        password: '111111',
+        identifycode: ''
       },
       loginRules: {
         username: [{ required: true, trigger: 'blur', validator: validateUsername }],
-        password: [{ required: true, trigger: 'blur', validator: validatePassword }]
+        password: [{ required: true, trigger: 'blur', validator: validatePassword }],
+        identifycode: [{required: true, trigger: 'blur', validator: validateIdentifyCode}]
       },
       loading: false,
       passwordType: 'password',
-      redirect: undefined
+      redirect: "/equipment",
+      identifyCode,identifyCodes
     }
   },
+  /* 监听器 */
   watch: {
     $route: {
       handler: function(route) {
@@ -94,6 +159,7 @@ export default {
       immediate: true
     }
   },
+  /* 方法 */
   methods: {
     showPwd() {
       if (this.passwordType === 'password') {
@@ -105,22 +171,57 @@ export default {
         this.$refs.password.focus()
       })
     },
-    handleLogin() {
+    handleLogin: function () {
       this.$refs.loginForm.validate(valid => {
         if (valid) {
           this.loading = true
-          this.$router.push({ path: this.redirect || '/' })
-          // this.$store.dispatch('user/login', this.loginForm).then(() => {
-          //   this.$router.push({ path: this.redirect || '/' })
-          //   this.loading = false
-          // }).catch(() => {
-          //   this.loading = false
-          // })
+          // this.$router.push({ path: this.redirect || '/' })
+          /* 向后端发送请求 */
+          request({
+            url: '/systemUser/login',
+            method: 'post',
+            params: {
+              userAccount: this.loginForm.username,
+              password: this.loginForm.password
+            }
+          }).then((res) => {
+            if (res.code === 200) {
+              /* 直接进入equipment路由页面，在equipment界面设置路由守卫 */
+              this.$router.push("/equipment")
+
+              this.loading = false
+            }
+
+          }).catch(() => {
+            this.loading = false
+          })
         } else {
           return false
         }
       })
+    },
+    /* 生成随机数 */
+    randomNum(min, max) {
+      return Math.floor(Math.random() * (max - min) + min)
+    },
+    //刷新验证码
+    refreshCode() {
+      this.identifyCode = "";
+      this.makeCode(this.identifyCodes, 4);
+    },
+    //生成验证码，l为生成验证码的长度
+    makeCode(o, l) {
+      for (let i = 0; i < l; i++) {
+        //随机字符串拼接
+        this.identifyCode += this.identifyCodes[
+            this.randomNum(0, this.identifyCodes.length)
+            ];
+      }
     }
+  },
+  mounted() {
+    this.identifyCode = "";
+    this.makeCode(this.identifyCodes, 4);
   }
 }
 </script>
@@ -148,16 +249,16 @@ $cursor: #fff;
 
     input {
       background: transparent;
-      border: 0px;
+      border: 0;
       -webkit-appearance: none;
-      border-radius: 0px;
+      border-radius: 0;
       padding: 12px 5px 12px 15px;
       color: $light_gray;
       height: 47px;
       caret-color: $cursor;
 
       &:-webkit-autofill {
-        box-shadow: 0 0 0px 1000px $bg inset !important;
+        box-shadow: 0 0 0 1000px $bg inset !important;
         -webkit-text-fill-color: $cursor !important;
       }
     }
@@ -218,7 +319,7 @@ $light_gray:#eee;
     .title {
       font-size: 26px;
       color: $light_gray;
-      margin: 0px auto 40px auto;
+      margin: 0 auto 40px auto;
       text-align: center;
       font-weight: bold;
     }

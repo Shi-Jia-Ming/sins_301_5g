@@ -16,7 +16,7 @@ import router from './router'
 import '@/icons' // icon
 import '@/permission' // permission control
 
-// 注册datav
+// 注册dataV
 import dataV from '@jiaminghi/data-view'
 
 // 全局混入
@@ -27,13 +27,13 @@ import { mixin } from './mixin'
  * you want to use MockJs for mock api
  * you can execute: mockXHR()
  *
- * Currently MockJs will be used in the production environment,
+ * Currently, MockJs will be used in the production environment,
  * please remove it before going online ! ! !
  */
-if (process.env.NODE_ENV === 'production') {
-  const { mockXHR } = require('../mock')
-  mockXHR()
-}
+// if (process.env.NODE_ENV === 'production') {
+//   const { mockXHR } = require('../mock')
+//   mockXHR()
+// }
 
 // set ElementUI lang to EN
 Vue.use(ElementUI, { locale })

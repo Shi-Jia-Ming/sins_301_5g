@@ -1,15 +1,21 @@
+<!-- 蓝牙手表设备管理界面的单个设备组件 -->
 <template>
     <div class="itemBox">
-      <div v-for="item in dataList" :key="item.equipmentId" class="item" >
-        <div class="top" :class="statusClass(item.status)"> 
+
+      <!-- item是单个组件信息，dataList是组件列表信息 -->
+      <div v-for="item in dataList" :key="item.equipmentId" class="item">
+        <div class="top" :class="statusClass(item.status)" @click="gotoDetail(item)">
+          <!-- 设备头像 -->
           <div class="avatar">
-            <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500">
+            <img src="https://img2.baidu.com/it/u=3421237124,2219416572&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=500" alt="img">
           </div>
+          <!--  设备基本信息 -->
           <div class="info">
             <div class="name">{{ item.status ? item.userName : '设备离线' }}</div>
             <div class="number">{{ item.equipmentCode }}</div>
           </div>
         </div>
+        <!-- TODO 点击删除按钮左侧的空白处没有反应 -->
         <div class="bot" @click="gotoDetail(item)">
           <div class="lx_flex list">
             <div class="list_flex">
@@ -22,10 +28,10 @@
             </div>
             <div class="list_flex">
               <span class="text">
-                在床状态
+                佩戴状态
               </span>
               <span class="status normal_status">
-                {{ item.inBedStatus === 1 ? '床垫受压' : item.inBedStatus === 2 ? '有人在床' : '无人在床' }}
+                {{ item.inBedStatus === 1 ? '床垫受压' : item.inBedStatus === 2 ? '佩戴正常' : '未佩戴' }}
               </span>
             </div>
           </div>
@@ -66,7 +72,7 @@
             </div>
           </div>
         </div>
-<!--        增加删除设备按钮-->
+        <!-- 增加删除设备按钮-->
         <el-button type="danger" @click="deleteDevice(item)" style="float: right; margin-right: 15px; margin-bottom: 10px">删除</el-button>
       </div>
     </div>
@@ -91,24 +97,27 @@ export default {
     }
   },
   methods: {
+    /* 进入详情页函数 */
     gotoDetail(e){
       const { userId, equipmentId } = e
       if( userId && equipmentId ){
         this.$router.push({
-          path: '/equipment/mattressDetail',
-          name: 'MattressDetail',
+          path: '/equipment/bluetoothWatchDetail',
+          name: 'BluetoothWatchDetail',
           query: {
             userId,
             equipmentId
           }
         })
-      }else{
+      } else {
+        /* 没有该用户 */
         this.$message({
           type: 'warning',
           message: '该设备暂无详细数据'
         })
       }
     },
+    /* 删除设备请求函数 */
     deleteDeviceRequest(e) {
       // console.log(e.equipmentId)
       request({
@@ -116,6 +125,7 @@ export default {
         method: 'delete',
       })
     },
+    /* 删除设备函数 */
     deleteDevice(e) {
       this.$confirm('是否删除此设备？', '确认信息', {
         distinguishCancelAndClose: true,
@@ -178,6 +188,7 @@ export default {
       overflow: hidden;
       cursor: pointer;
       border: 1px solid #00000015;
+      //background-color: #FF7A94FF;
 
       &:hover{
         box-shadow: 0 0 10px #0000002e;

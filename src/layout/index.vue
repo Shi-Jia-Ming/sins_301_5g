@@ -1,11 +1,15 @@
 <template>
+  <!-- 界面主体 -->
   <div :class="classObj" class="app-wrapper">
-    <div v-if="device==='mobile'&&sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <div v-if="device === 'mobile' && sidebar.opened" class="drawer-bg" @click="handleClickOutside" />
+    <!-- 自定义侧边栏 -->
     <sidebar class="sidebar-container" />
     <div class="main-container">
       <div :class="{'fixed-header':fixedHeader}">
+        <!-- 标题栏组件 -->
         <navbar />
       </div>
+      <!-- 设备页 -->
       <app-main />
     </div>
   </div>
@@ -14,6 +18,8 @@
 <script>
 import { Navbar, Sidebar, AppMain } from './components'
 import ResizeMixin from './mixin/ResizeHandler'
+
+import cookies from "vue-cookies"
 
 export default {
   name: 'Layout',
@@ -46,9 +52,18 @@ export default {
     handleClickOutside() {
       this.$store.dispatch('app/closeSideBar', { withoutAnimation: false })
     }
+  },
+  beforeCreate() {
+    /* 原本在login界面，但是那样只有在登录时才会检查cookie，并不会起到实际作用 */
+    if (cookies.get("userId")) {
+      this.$router.push("/equipment")
+    } else {
+      this.$router.push("/login")
+    }
   }
 }
 </script>
+
 
 <style lang="scss" scoped>
   @import "~@/styles/mixin.scss";

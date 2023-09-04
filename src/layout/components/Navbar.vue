@@ -1,13 +1,18 @@
+<!-- 标题栏组件 -->
 <template>
   <div class="navbar">
+    <!-- 控制侧边栏展开和收起的按钮组件 -->
     <hamburger :is-active="sidebar.opened" class="hamburger-container" @toggleClick="toggleSideBar" />
 
+    <!-- 面包屑标题 -->
+    <!-- TODO 面包屑标题优化 -->
     <breadcrumb class="breadcrumb-container" />
 
+    <!-- TODO -->
     <div class="right-menu" style="display: none;">
       <el-dropdown class="avatar-container" trigger="click">
         <div class="avatar-wrapper">
-          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar">
+          <img :src="avatar+'?imageView2/1/w/80/h/80'" class="user-avatar" alt="user-avatar">
           <i class="el-icon-caret-bottom" />
         </div>
         <el-dropdown-menu slot="dropdown" class="user-dropdown">

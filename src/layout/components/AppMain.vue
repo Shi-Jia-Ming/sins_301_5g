@@ -1,3 +1,4 @@
+<!-- 设备页，只设置一个路由视图，其中包括蓝牙手表管理界面视图和睡眠生命体征监测垫界面视图 -->
 <template>
   <section class="app-main">
     <transition name="fade-transform" mode="out-in">
@@ -19,7 +20,7 @@ export default {
 
 <style scoped lang="scss">
 .app-main {
-  /*50 = navbar  */
+  /* 50 = navbar  */
   min-height: calc(100vh - 50px);
   width: 100%;
   position: relative;

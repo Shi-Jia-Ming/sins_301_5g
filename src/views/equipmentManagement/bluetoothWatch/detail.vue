@@ -8,16 +8,7 @@
       </div>
       <!-- 统计图 -->
       <div class="summaryGraph">
-        <HeartGraph :echartsData="basicData" :userId="userId" :equipmentId="equipmentId" />
-      </div>
-      <div class="summaryGraph">
-        <BreatheGraph :echartsData="basicData" :userId="userId" :equipmentId="equipmentId" />
-      </div>
-      <div class="summaryGraph">
         <SummaryGraph :echartsData="echartsData" :userId="userId" :equipmentId="equipmentId" />
-      </div>
-      <div class="summaryGraph">
-        <SleepGraph :echartsData="echartsData" :userId="userId" :equipmentId="equipmentId" />
       </div>
     </div>
     <div class="rightCon">
@@ -29,9 +20,6 @@
 <script>
 import BasicInfo from './components/basicInfo.vue'
 import SummaryGraph from './components/summaryGraph.vue'
-import HeartGraph from "./components/heartGraph";
-import BreatheGraph from "./components/breatheGraph";
-import SleepGraph from "./components/sleepGraph";
 import OtherInfo from './components/otherInfo.vue'
 import request from "@/utils/request"
 
@@ -39,9 +27,6 @@ export default {
   components: {
     BasicInfo,
     SummaryGraph,
-    HeartGraph,
-    BreatheGraph,
-    SleepGraph,
     OtherInfo
   },
   data() {
@@ -88,7 +73,7 @@ export default {
     getBasicData(userId, equipmentId){
       const timestamp = Date.parse(new Date())
       return request({
-        url: 'mattress/findBreatheRateAndHeartRate',
+        url: 'mattress/findBreatheAndHR',
         method: 'get',
         params: {
           userId,
@@ -101,13 +86,10 @@ export default {
       const requestAll = [this.getDetailData(this.userId, this.equipmentId), this.getEchartsData(this.userId, this.equipmentId), this.getBasicData(this.userId, this.equipmentId)]
       this.loading_s()
       Promise.all(requestAll).then(res=>{
-        // console.log("res:", res)
         this.userInfo = res[0].data.userInfo
         this.equipmentInfo = res[0].data.equipmentInfo
         this.echartsData = res[1].data
-        // console.log("res[1].data", res[1].data)
         this.basicData = res[2].data
-        console.log("res[2].data", res[2].data)
       }).finally(_=>{
         this.closeLoading()
       })
@@ -127,7 +109,7 @@ export default {
       this.allRequest()
       this.timer = setInterval(_ => {
         this.allRequest()
-      }, 1000);
+      }, 10000);
     }
   },
   beforeDestroy(){
