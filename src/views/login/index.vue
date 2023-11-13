@@ -129,14 +129,13 @@ export default {
         callback()
       }
     }
-    /* 生成验证码的字符范围 */
-    const identifyCodes =  "abcdefhijkmnprstwxyz0123456789"
     /* 生成的验证码 */
     const identifyCode = ""
     return {
       loginForm: {
         username: 'admin',
-        password: '111111',
+        // password: '111111',
+        password: '',
         identifycode: ''
       },
       loginRules: {
@@ -147,7 +146,7 @@ export default {
       loading: false,
       passwordType: 'password',
       redirect: "/equipment",
-      identifyCode,identifyCodes
+      identifyCode
     }
   },
   /* 监听器 */
@@ -182,7 +181,8 @@ export default {
             method: 'post',
             params: {
               userAccount: this.loginForm.username,
-              password: this.loginForm.password
+              password: this.loginForm.password,
+              identifyCode: this.identifyCode
             }
           }).then((res) => {
             if (res.code === 200) {
@@ -206,22 +206,26 @@ export default {
     },
     //刷新验证码
     refreshCode() {
-      this.identifyCode = "";
-      this.makeCode(this.identifyCodes, 4);
+      request({
+        url: '/systemUser/getCode',
+        method: 'get'
+      }).then((res) => {
+        this.identifyCode = res.data;
+      })
     },
-    //生成验证码，l为生成验证码的长度
-    makeCode(o, l) {
-      for (let i = 0; i < l; i++) {
-        //随机字符串拼接
-        this.identifyCode += this.identifyCodes[
-            this.randomNum(0, this.identifyCodes.length)
-            ];
-      }
+    //从后端获取验证码
+    makeCode() {
+      request({
+        url: '/systemUser/getCode',
+        method: 'get'
+      }).then((res) => {
+        this.identifyCode = res.data;
+      })
     }
   },
   mounted() {
     this.identifyCode = "";
-    this.makeCode(this.identifyCodes, 4);
+    this.makeCode();
   }
 }
 </script>
