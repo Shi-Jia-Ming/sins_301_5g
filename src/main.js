@@ -21,6 +21,7 @@ import dataV from '@jiaminghi/data-view'
 
 // 全局混入
 import { mixin } from './mixin'
+import {isLogin} from "@/utils/login-auth";
 
 /**
  * If you don't want to use mock-server
@@ -49,4 +50,12 @@ new Vue({
   router,
   store,
   render: h => h(App)
+})
+
+router.beforeEach((to, from, next) => {
+  if (!isLogin() && to.name !== 'Login') {
+    next({ name: 'Login' });
+  } else {
+    next();
+  }
 })

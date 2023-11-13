@@ -12,6 +12,7 @@ export const constantRoutes = [
   {/* 登录界面 */
     path: '/login',
     component: () => import('@/views/login/index'),
+    name: 'Login',
     hidden: true
   },
   {/* 404界面 */
